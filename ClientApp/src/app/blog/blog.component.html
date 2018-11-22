@@ -1,0 +1,93 @@
+<div class="panel panel-success col-lg-4">
+  <div class="panel-heading">PREGUNTAS
+
+  </div>
+  <div class="panel-body">
+    <legend>INGRESO DE PREGUNTA</legend>
+    <input [(ngModel)]="inputPregunta" type="text" class="form-control " id="nombreComunidad">
+    <legend>TEMA</legend>
+
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">seleccione una opcion
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let item of ListaTemas">
+          <label (click)=" CargarTema(item.temaid, item.nombre)" style="margin-right: 10px">
+            {{item.nombre}}
+          </label>
+        </li>
+      </ul>
+    </div>
+    <legend>¿SABE LA RESPUESTA?</legend>
+    <label>SI</label>
+    <input [(ngModel)]="siRespuesta" type="checkbox" id="nombreComunidad">
+    <!-- <label>NO</label>
+    <input [(ngModel)]="noRespuesta" type="checkbox" id="nombreComunidad"> -->
+    <div *ngIf="siRespuesta">
+      <div class="form-group">
+        <label for="comment">RESPUESTA:</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="panel-footer">
+
+    <button (click)="GuardarPregunta()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+    <button [routerLink]='["/home"]' class="btn btn-danger  pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button>
+  </div>
+
+
+
+
+
+</div>
+
+<div class="panel panel-info col-lg-8">
+  <div class="panel-heading">PREGUNTAS
+
+  </div>
+  <div class="panel-body">
+    <div class="col-lg-6">
+      <legend>PREGUNTAS CON RESPUESTA</legend>
+
+
+    </div>
+    <div class="col-lg-6">
+
+      <legend>PREGUNTAS SIN RESPUESTA</legend>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>PREGUNTA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="active" *ngFor="let item of listaPreguntaF">
+            <td>{{item.pregunta1}}</td>
+
+            <td style="margin-left: 10px"><button class="btn btn-info ">RESPONDER</button></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+  </div>
+  <div class="panel-footer">
+
+    <!-- <button (click)="GuardarPersona()"  class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+    <button [routerLink]='["/home"]'  class="btn btn-danger  pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button> -->
+  </div>
+
+
+
+
+
+</div>
+<!-- <button (click)="GuardarPersona()"  class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+    <button [routerLink]='["/home"]'  class="btn btn-danger  pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button> -->
