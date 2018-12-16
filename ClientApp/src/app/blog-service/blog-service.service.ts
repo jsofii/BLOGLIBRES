@@ -13,13 +13,14 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class BlogServiceService {
 
-
-  constructor(private http: HttpClient) {
   
+  constructor(private http: HttpClient) {
+    this.host='https://localhost:5001/api';
   }
-
+  host:any;
+  
   CargarTema(){
-    return this.http.get('https://localhost:5001/api/Blog/ListaTema');
+    return this.http.get(this.host+'/Blog/ListaTema');
   }
   GuardarPregunta(temaid:any, pregunta1:any, estado:any){
     var pregunta={
@@ -27,10 +28,10 @@ export class BlogServiceService {
       Pregunta1:pregunta1,
       Estado:estado
     }
-    return this.http.post('https://localhost:5001/api/Blog/AddPregunta/', pregunta);
+    return this.http.post(this.host+'/Blog/AddPregunta/', pregunta);
   }
   CargarPreguntaF(){
-    return this.http.get('https://localhost:5001/api/Blog/ListaPF');
+    return this.http.get(this.host+'/Blog/ListaPF');
   }
 
 

@@ -70,7 +70,7 @@
           <tr class="active" *ngFor="let item of listaPreguntaF">
             <td>{{item.pregunta1}}</td>
 
-            <td style="margin-left: 10px"><button class="btn btn-info ">RESPONDER</button></td>
+            <td [routerLink]='["/gestion-respuesta",item.preguntaid]' style="margin-left: 10px"><button class="btn btn-info ">RESPONDER</button></td>
           </tr>
 
         </tbody>

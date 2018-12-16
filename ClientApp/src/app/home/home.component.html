@@ -1,19 +1,66 @@
+<!-- <div class="container">
+  <div class="panel panel-info ">
+    <div class="panel panel-heading">
+      <legend>TEMAS DISPONIBLES</legend>
+    </div>
+    <div class="panel-body col-lg-6">
 
-  <div class="col-lg-6">
-    <button [routerLink]='["/blog/1"]' class="btn btn-default ">METODOLOGÍAS ÁGILES</button>
-    <div class="item1"></div>
+      <h2>Striped Rows</h2>
+      <p>The .table-striped class adds zebra-stripes to a table:</p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>TEMA</th>
+
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+            <td>
+              <button class="btn btn-success">INGRESAR</button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <div class="panel panel-footer">
+
+    </div>
+
+  </div> -->
+<div class="container">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <legend>TEMAS DISPONIBLES</legend>
+    </div>
+    <div class="panel-body ">
+      <div class="col-md-offset-3 col-lg-6">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>TEMA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listaTemas">
+              <td>{{item.nombre}}</td>
+              <div class="pull-right">
+                <td>
+                  <button [routerLink]='["/blog/", item.temaid]' class="btn btn-success">INGRESAR</button>
+                </td>
+              </div>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  <div class="col-lg-6">
-    <button [routerLink]='["/blog/2"]' class="btn btn-default">METODOLOGÍAS TRADICIONALES</button>
-    <div class="item1"></div>
-  </div>
-  <div class="col-lg-6">
-    <button [routerLink]='["/blog/3"]' class="btn btn-default">PROGRAMACIÓN WEB</button>
-    <div class="item3"></div>
-  
-  </div>
-  <div class="col-lg-6">
-    <button [routerLink]='["/blog/4"]' class="btn btn-default">PROGRAMACIÓN MOVIL</button>
-    <div class="item4"></div>
-  
-  </div>
+</div>
