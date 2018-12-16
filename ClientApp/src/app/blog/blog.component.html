@@ -8,19 +8,9 @@
   <div class="panel-body">
     <legend>INGRESO DE PREGUNTA</legend>
     <input [(ngModel)]="inputPregunta" type="text" class="form-control " id="nombreComunidad">
-    <legend>TEMA</legend>
+   
 
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">seleccione una opcion
-        <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li *ngFor="let item of ListaTemas">
-          <label (click)=" CargarTema(item.temaid, item.nombre)" style="margin-right: 10px">
-            {{item.nombre}}
-          </label>
-        </li>
-      </ul>
-    </div>
+    
     <legend>¿SABE LA RESPUESTA?</legend>
     <label>SI</label>
     <input [(ngModel)]="siRespuesta" type="checkbox" id="nombreComunidad">

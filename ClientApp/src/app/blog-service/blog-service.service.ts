@@ -37,6 +37,7 @@ export class BlogServiceService {
   CargarPreguntaT(temaid:any){
     return this.http.get(this.host+'/Blog/ListaPT/'+temaid);
   }
+ 
 
 
 }

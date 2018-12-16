@@ -37,7 +37,18 @@ namespace _1.Libres.Controllers
             this.context.SaveChanges();
             return this.context.Respuesta.ToList();
         }
-         
+        [HttpPost]
+        [Route("CambiarEstado")]
+
+        public List<Respuesta> Respuesta([FromBody] Pregunta p)
+        {
+            Boolean b = false;
+            Pregunta pregunta = this.context.Pregunta.Find(p.Preguntaid);
+            pregunta.Estado = true;
+            this.context.SaveChanges();
+            return this.context.Respuesta.ToList();
+        }
+
 
     }
 }

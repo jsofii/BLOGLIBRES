@@ -31,6 +31,11 @@ export class GestionService {
     }
     return this.http.post(this.host +'/Respuesta/IngresarRespuesta', respuesta);
   }
-
+  CambiarEstado(preguntaid:any){
+    var x={
+      Preguntaid:preguntaid
+    }
+    return this.http.post(this.host+'/Respuesta/CambiarEstado', x);
+  }
 
 }

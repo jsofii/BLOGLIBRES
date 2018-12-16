@@ -42,10 +42,18 @@ export class GestionRespuestaComponent implements OnInit {
     this.gestionService.GuardarRespuesta(this.contenido, this.idPregunta).subscribe(
       data=>{
         this.CargarRespuestas();
+        this.CambiarEstado();
       }
       
     );
    
+  }
+  CambiarEstado(){
+    this.gestionService.CambiarEstado(this.idPregunta).subscribe(
+      data=>{
+
+      }
+    )
   }
 
   ngOnInit() {
