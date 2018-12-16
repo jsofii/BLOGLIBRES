@@ -47,7 +47,7 @@ export class BlogComponent implements OnInit {
   }
   inputPregunta:any;
   GuardarPregunta(){
-    this.blogservice.GuardarPregunta(this.selectTemaid, this.inputPregunta, this.siRespuesta).subscribe(
+    this.blogservice.GuardarPregunta(this.idtema, this.inputPregunta, this.siRespuesta).subscribe(
       data=>{
         this.CargarPreguntaF();
       }

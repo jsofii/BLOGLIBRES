@@ -20,9 +20,35 @@ namespace _1.Libres.Controllers
         [Route("Pregunta/{preguntaid}")]
         public Pregunta Pregunta(int preguntaid)
         {
-            Pregunta p=this.context.Pregunta.Find(preguntaid);
+            Pregunta p = this.context.Pregunta.Find(preguntaid);
             return p;
         }
+        [HttpPost]
+        [Route("IngresarRespuesta")]
+        public List<Respuesta> Respuesta([FromBody] Respuesta respuesta)
+        {
+            Respuesta res = new Respuesta
+            {
+                Contenido = respuesta.Contenido,
+                Preguntaid = respuesta.Preguntaid
+
+            };
+            this.context.Respuesta.Add(res);
+            this.context.SaveChanges();
+            return this.context.Respuesta.ToList();
+        }
+        [HttpPost]
+        [Route("CambiarEstado")]
+
+        public List<Respuesta> Respuesta([FromBody] Pregunta p)
+        {
+            Boolean b = false;
+            Pregunta pregunta = this.context.Pregunta.Find(p.Preguntaid);
+            pregunta.Estado = true;
+            this.context.SaveChanges();
+            return this.context.Respuesta.ToList();
+        }
+
 
     }
 }

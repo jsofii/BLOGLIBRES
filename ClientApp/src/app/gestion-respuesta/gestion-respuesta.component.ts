@@ -11,6 +11,7 @@ import { GestionService} from '../gestion-service/gestion-service.service';
 export class GestionRespuestaComponent implements OnInit {
   idPregunta:any;
   tieneRespuesta:any;
+  contenido:string;
   constructor(private rutaActiva: ActivatedRoute, private gestionService: GestionService) { 
     this.idPregunta= this.rutaActiva.snapshot.params.idPregunta;
     this.tieneRespuesta=this.rutaActiva.snapshot.params.tieneRespuesta;
@@ -34,6 +35,23 @@ export class GestionRespuestaComponent implements OnInit {
       data=>{
         this.pregunta=data;
         this.preguntaNombre=this.pregunta.pregunta1;
+      }
+    )
+  }
+  IngresarRespuesta(){
+    this.gestionService.GuardarRespuesta(this.contenido, this.idPregunta).subscribe(
+      data=>{
+        this.CargarRespuestas();
+        this.CambiarEstado();
+      }
+      
+    );
+   
+  }
+  CambiarEstado(){
+    this.gestionService.CambiarEstado(this.idPregunta).subscribe(
+      data=>{
+
       }
     )
   }
