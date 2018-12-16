@@ -11,6 +11,11 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogServiceService } from './blog-service/blog-service.service';
+import { GestionRespuestaComponent } from './gestion-respuesta/gestion-respuesta.component';
+import { GestionService} from './gestion-service/gestion-service.service';
+import{HomeService} from './home-service/home-service.service';
+
+//import { servicioPreguntasService } from './servicioPreguntas/servicioPreguntas.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,8 @@ import { BlogServiceService } from './blog-service/blog-service.service';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    BlogComponent
+    BlogComponent,
+    GestionRespuestaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,9 +37,10 @@ import { BlogServiceService } from './blog-service/blog-service.service';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'home', component: HomeComponent },
       { path: 'blog/:id', component: BlogComponent },
+      { path: 'gestion-respuesta/:idPregunta/:tieneRespuesta', component: GestionRespuestaComponent}
     ])
   ],
-  providers: [BlogServiceService],
+  providers: [BlogServiceService, GestionService, HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

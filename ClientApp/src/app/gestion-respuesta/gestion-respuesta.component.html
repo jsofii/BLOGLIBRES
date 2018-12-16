@@ -1,0 +1,33 @@
+<div class="panel panel-info container">
+  <div class="panel-heading">PREGUNTA</div>
+  <div class="panel-body">
+    <div>
+      <label for="">{{preguntaNombre}}</label>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>TODAS LAS RESPUESTAS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="active" *ngFor="let item of listaRespuestas">
+          <div  style="margin-top: 5px">
+          <textarea  class="form-control" rows="5" id="comment">{{item.contenido}}</textarea>
+          </div>
+        </tr>
+
+      </tbody>
+    </table>
+    <div>
+      <legend >INGRESAR RESPUESTA:</legend>
+
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+      </div>
+      <button  style="margin-top: 20px" class="btn btn-success">INGRESAR</button>
+    </div>
+
+  </div>
+</div>
