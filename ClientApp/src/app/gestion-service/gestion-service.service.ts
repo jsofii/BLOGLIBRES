@@ -24,6 +24,13 @@ export class GestionService {
   ObtenerPregunta(preguntaid:number){
     return this.http.get(this.host+'/Respuesta/Pregunta/'+preguntaid)
   }
+  GuardarRespuesta(contenido:any, preguntaid:any){
+    var respuesta={
+      Contenido:contenido,
+      Preguntaid:preguntaid
+    }
+    return this.http.post(this.host +'/Respuesta/IngresarRespuesta', respuesta);
+  }
 
 
 }
