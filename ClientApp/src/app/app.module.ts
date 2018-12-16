@@ -37,7 +37,7 @@ import{HomeService} from './home-service/home-service.service';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'home', component: HomeComponent },
       { path: 'blog/:id', component: BlogComponent },
-      { path: 'gestion-respuesta/:idPregunta', component: GestionRespuestaComponent}
+      { path: 'gestion-respuesta/:idPregunta/:tieneRespuesta', component: GestionRespuestaComponent}
     ])
   ],
   providers: [BlogServiceService, GestionService, HomeService],

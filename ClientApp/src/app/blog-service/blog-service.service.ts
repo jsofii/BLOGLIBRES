@@ -30,8 +30,12 @@ export class BlogServiceService {
     }
     return this.http.post(this.host+'/Blog/AddPregunta/', pregunta);
   }
-  CargarPreguntaF(){
-    return this.http.get(this.host+'/Blog/ListaPF');
+  
+  CargarPreguntaF(temaid:any){
+    return this.http.get(this.host+'/Blog/ListaPF/'+temaid);
+  }
+  CargarPreguntaT(temaid:any){
+    return this.http.get(this.host+'/Blog/ListaPT/'+temaid);
   }
 
 

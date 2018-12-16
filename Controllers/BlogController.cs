@@ -23,10 +23,16 @@ namespace _1.Libres.Controllers
             return this.context.Pregunta.ToList();
         }
         [HttpGet]
-        [Route("ListaPF")]
-        public List<Pregunta> ListaTemaFalso()
+        [Route("ListaPF/{idTema}")]
+        public List<Pregunta> ListaTemaFalso(int idTema)
         {
-            return this.context.Pregunta.Where(s => s.Estado == false).ToList();
+            return this.context.Pregunta.Where(Pregunta => Pregunta.Temaid == idTema).Where(s => s.Estado == false).ToList();
+        }
+        [HttpGet]
+        [Route("ListaPT/{idTema}")]
+        public List<Pregunta> ListaTemaVerdadero(int idTema)
+        {
+            return this.context.Pregunta.Where(Pregunta => Pregunta.Temaid == idTema).Where(s => s.Estado == true).ToList();
         }
         [HttpGet]
         [Route("ListaPT")]

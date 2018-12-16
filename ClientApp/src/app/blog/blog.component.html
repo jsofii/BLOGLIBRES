@@ -54,8 +54,21 @@
   <div class="panel-body">
     <div class="col-lg-6">
       <legend>PREGUNTAS CON RESPUESTA</legend>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>PREGUNTA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="active" *ngFor="let item of listaPreguntaT">
+            <td>{{item.pregunta1}}</td>
 
+            <td [routerLink]='["/gestion-respuesta",item.preguntaid, 1]' style="margin-left: 10px"><button class="btn btn-info ">RESPONDER</button></td>
+          </tr>
 
+        </tbody>
+      </table>
     </div>
     <div class="col-lg-6">
 
@@ -70,7 +83,7 @@
           <tr class="active" *ngFor="let item of listaPreguntaF">
             <td>{{item.pregunta1}}</td>
 
-            <td [routerLink]='["/gestion-respuesta",item.preguntaid]' style="margin-left: 10px"><button class="btn btn-info ">RESPONDER</button></td>
+            <td [routerLink]='["/gestion-respuesta",item.preguntaid, 0]' style="margin-left: 10px"><button class="btn btn-info ">RESPONDER</button></td>
           </tr>
 
         </tbody>

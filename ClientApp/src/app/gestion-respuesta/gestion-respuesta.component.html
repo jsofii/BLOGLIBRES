@@ -1,24 +1,26 @@
 <div class="panel panel-info container">
   <div class="panel-heading">PREGUNTA</div>
   <div class="panel-body">
-
+    <div>
+      <label for="">{{preguntaNombre}}</label>
+    </div>
     <table class="table">
       <thead>
         <tr>
-          <th>PREGUNTA</th>
+          <th>TODAS LAS RESPUESTAS</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="active" *ngFor="let item of listaPreguntaF">
-          <td>{{item.pregunta1}}</td>
-
-          <td style="margin-left: 10px"><button class="btn btn-info ">RESPONDER</button></td>
+        <tr class="active" *ngFor="let item of listaRespuestas">
+          <div  style="margin-top: 5px">
+          <textarea  class="form-control" rows="5" id="comment">{{item.contenido}}</textarea>
+          </div>
         </tr>
 
       </tbody>
     </table>
     <div>
-      <legend style="">INGRESAR RESPUESTA:</legend>
+      <legend >INGRESAR RESPUESTA:</legend>
 
       <div class="form-group">
         <label for="comment">Comment:</label>

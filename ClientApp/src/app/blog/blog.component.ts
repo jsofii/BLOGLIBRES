@@ -10,12 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 export class BlogComponent implements OnInit {
   idtema:any;
   constructor(private blogservice:BlogServiceService,private rutaActiva: ActivatedRoute) {
-    this.idtema=this.rutaActiva.snapshot.params.usuario;
+    this.idtema=this.rutaActiva.snapshot.params.id;
    }
 
   ngOnInit() {
     this.CargarListaTema();
     this.CargarPreguntaF();
+    this.CargarPreguntaT();
   }
   ListaTemas:any;
   
@@ -54,11 +55,20 @@ export class BlogComponent implements OnInit {
   }
   listaPreguntaF:any;
   CargarPreguntaF(){
-    this.blogservice.CargarPreguntaF().subscribe(
+    this.blogservice.CargarPreguntaF(this.idtema).subscribe(
       data=>{
         this.listaPreguntaF=data;
       }
     )
   }
+  listaPreguntaT:any;
+  CargarPreguntaT(){
+    this.blogservice.CargarPreguntaT(this.idtema).subscribe(
+      data=>{
+        this.listaPreguntaT=data;
+      }
+    )
+  }
+  
 
 }

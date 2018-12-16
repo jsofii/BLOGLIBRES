@@ -10,9 +10,12 @@ import { GestionService} from '../gestion-service/gestion-service.service';
 })
 export class GestionRespuestaComponent implements OnInit {
   idPregunta:any;
+  tieneRespuesta:any;
   constructor(private rutaActiva: ActivatedRoute, private gestionService: GestionService) { 
     this.idPregunta= this.rutaActiva.snapshot.params.idPregunta;
-
+    this.tieneRespuesta=this.rutaActiva.snapshot.params.tieneRespuesta;
+    this.CargarRespuestas();
+    this.CargarPregunta();
   }
   //Función que carga las Respuestas de una pregunta
   listaRespuestas:any;
@@ -23,6 +26,16 @@ export class GestionRespuestaComponent implements OnInit {
       }
     )
     
+  }
+  preguntaNombre:any;
+  pregunta:any;
+  CargarPregunta(){
+    this.gestionService.ObtenerPregunta(this.idPregunta).subscribe(
+      data=>{
+        this.pregunta=data;
+        this.preguntaNombre=this.pregunta.pregunta1;
+      }
+    )
   }
 
   ngOnInit() {

@@ -21,6 +21,9 @@ export class GestionService {
   CargarRespuestas(preguntaid:number){
       return this.http.get(this.host+'/Respuesta/ListaRespuestas/'+preguntaid);
   }
+  ObtenerPregunta(preguntaid:number){
+    return this.http.get(this.host+'/Respuesta/Pregunta/'+preguntaid)
+  }
 
 
 }
