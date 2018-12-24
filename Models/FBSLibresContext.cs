@@ -23,6 +23,7 @@ namespace BLOGLIBRES.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+                // esta parte seria buena ponerla en el gitignore
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("server=DESKTOP-NQEJ9JQ\\DBSOFIA;user=sa;password=sofi;database=FBSLibres");
             }
