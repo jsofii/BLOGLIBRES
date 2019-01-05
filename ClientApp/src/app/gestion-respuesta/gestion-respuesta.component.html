@@ -12,15 +12,16 @@
       </thead>
       <tbody>
         <tr class="active" *ngFor="let item of listaRespuestas">
-          <div  style="margin-top: 5px">
-          <textarea  class="form-control" rows="5" id="comment">{{item.contenido}}</textarea>
+          <div style="margin-top: 10px">
+            <textarea class="form-control" rows="5" id="comment">{{item.contenido}}</textarea>
+            <button (click)="DeleteRespuesta(item.respuestaid)" class="btn btn-danger pull-right glyphicon glyphicon-remove-circle" style="margin:5px 0px 0px 83%"> ELIMINAR</button>
           </div>
         </tr>
 
       </tbody>
     </table>
     <div>
-     
+
 
       <div class="form-group">
         <h3 for="comment">Nueva respuesta:</h3>

@@ -70,5 +70,5 @@ export class BlogComponent implements OnInit {
     )
   }
   
-
+//comentario
 }

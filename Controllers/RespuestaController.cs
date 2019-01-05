@@ -49,6 +49,20 @@ namespace _1.Libres.Controllers
             return this.context.Respuesta.ToList();
         }
 
+        [HttpDelete]
+        [Route("Eliminar/{idrespuesta}")]
+        public List<Respuesta> Eliminar(int idrespuesta)
+        {
+            Respuesta res = new Respuesta
+            {
+                Respuestaid = idrespuesta
+            };
+
+            context.Remove(res);
+            context.SaveChanges();
+            return context.Respuesta.ToList();
+        }
+
 
     }
 }
