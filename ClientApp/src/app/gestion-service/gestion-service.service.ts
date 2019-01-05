@@ -38,4 +38,9 @@ export class GestionService {
     return this.http.post(this.host+'/Respuesta/CambiarEstado', x);
   }
 
+  EliminarRespuesta(idrespuesta:number){
+    return this.http.delete(this.host+'/Respuesta/Eliminar/' + idrespuesta);
+  }
+
+  
 }

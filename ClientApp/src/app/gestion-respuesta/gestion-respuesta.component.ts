@@ -56,6 +56,23 @@ export class GestionRespuestaComponent implements OnInit {
     )
   }
 
+  DeleteRespuesta(idrespuesta: number) {
+
+    if (confirm("SE ELIMINARA?")) {
+
+
+      this.gestionService.EliminarRespuesta(idrespuesta).subscribe(
+        data => {
+
+          this.CargarRespuestas();
+
+        }
+      )
+    } else {
+
+    }
+  }
+
   ngOnInit() {
   }
 
