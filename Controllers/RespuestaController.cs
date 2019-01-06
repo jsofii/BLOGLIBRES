@@ -42,7 +42,7 @@ namespace _1.Libres.Controllers
 
         public List<Respuesta> Respuesta([FromBody] Pregunta p)
         {
-            Boolean b = false;
+            //Boolean b = false;
             Pregunta pregunta = this.context.Pregunta.Find(p.Preguntaid);
             pregunta.Estado = true;
             this.context.SaveChanges();
