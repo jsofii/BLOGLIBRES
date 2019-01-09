@@ -1,6 +1,8 @@
 <div class="panel panel-info container">
-  <div class="panel-heading">PREGUNTA</div>
+  <div class="panel-heading">TEMA  {{preguntaNombre}}</div>
   <div class="panel-body">
+    <div class="col-lg-8"></div>
+    <div class="col-lg-4"></div>
     <div>
       <h1 for="">{{preguntaNombre}}</h1>
     </div>
@@ -13,8 +15,26 @@
       <tbody>
         <tr class="active" *ngFor="let item of listaRespuestas">
           <div style="margin-top: 10px">
-            <textarea class="form-control" rows="5" id="comment">{{item.contenido}}</textarea>
-            <button (click)="DeleteRespuesta(item.respuestaid)" class="btn btn-danger pull-right glyphicon glyphicon-remove-circle" style="margin:5px 0px 0px 83%"> ELIMINAR</button>
+            <div class="col-lg-8">
+            <textarea class="form-control" rows="5" id="comment">
+              {{item.contenido}}
+            </textarea>
+          </div>
+          <div class="col-lg-4">
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Usuario:</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">sofia</p>
+                  </div>
+                  <label class="control-label col-sm-2" for="email">Fecha:</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">2/10/11</p>
+                    <button (click)="DeleteRespuesta(item.respuestaid)" class="btn btn-danger pull-right glyphicon glyphicon-remove-circle" style="margin:5px 0px 0px 83%"> ELIMINAR</button>
+                  </div>
+                  
+                </div>
+          </div>
+           
           </div>
         </tr>
 

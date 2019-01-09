@@ -43,6 +43,7 @@ export class GestionRespuestaComponent implements OnInit {
       data=>{
         this.CargarRespuestas();
         this.CambiarEstado();
+        this.contenido="";
       }
       
     );

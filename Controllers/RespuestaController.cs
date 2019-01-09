@@ -16,6 +16,12 @@ namespace _1.Libres.Controllers
         {
             return this.context.Respuesta.Where(s => s.Preguntaid == preguntaid).ToList();
         }
+         [HttpGet]
+        [Route("prueba")]
+        public List<Respuesta> prueba(int preguntaid)
+        {
+            return this.context.Respuesta.ToList();
+        }
         [HttpGet]
         [Route("Pregunta/{preguntaid}")]
         public Pregunta Pregunta(int preguntaid)

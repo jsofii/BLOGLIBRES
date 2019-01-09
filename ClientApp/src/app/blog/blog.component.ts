@@ -15,8 +15,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     this.CargarListaTema();
-    this.CargarPreguntaF();
-    this.CargarPreguntaT();
+
   }
   ListaTemas:any;
   
@@ -46,29 +45,11 @@ export class BlogComponent implements OnInit {
     this.selectNombre=nombre;
   }
   inputPregunta:any;
-  GuardarPregunta(){
-    this.blogservice.GuardarPregunta(this.idtema, this.inputPregunta, this.siRespuesta).subscribe(
-      data=>{
-        this.CargarPreguntaF();
-      }
-    )
-  }
+ 
   listaPreguntaF:any;
-  CargarPreguntaF(){
-    this.blogservice.CargarPreguntaF(this.idtema).subscribe(
-      data=>{
-        this.listaPreguntaF=data;
-      }
-    )
-  }
+
   listaPreguntaT:any;
-  CargarPreguntaT(){
-    this.blogservice.CargarPreguntaT(this.idtema).subscribe(
-      data=>{
-        this.listaPreguntaT=data;
-      }
-    )
-  }
+  
   
 //comentario
 }

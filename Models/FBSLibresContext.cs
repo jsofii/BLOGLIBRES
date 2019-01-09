@@ -18,14 +18,14 @@ namespace BLOGLIBRES.Models
         public virtual DbSet<Pregunta> Pregunta { get; set; }
         public virtual DbSet<Respuesta> Respuesta { get; set; }
         public virtual DbSet<Tema> Tema { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // esta parte seria buena ponerla en el gitignore
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("server=ALLINONE10Q;user=sa;password=cesar;database=FBSLibres");
+                optionsBuilder.UseSqlServer("server=DESKTOP-NQEJ9JQ\\DBSOFIA;user=sa;password=sofi;database=FBSLibres");
             }
         }
 
@@ -39,16 +39,20 @@ namespace BLOGLIBRES.Models
 
                 entity.Property(e => e.Estado).HasColumnName("ESTADO");
 
+                entity.Property(e => e.Fecha)
+                    .HasColumnName("FECHA")
+                    .HasColumnType("datetime");
+
                 entity.Property(e => e.Pregunta1)
                     .HasColumnName("PREGUNTA")
                     .HasMaxLength(500);
 
-                entity.Property(e => e.Temaid).HasColumnName("TEMAID");
+                entity.Property(e => e.Usuarioid).HasColumnName("USUARIOID");
 
-                entity.HasOne(d => d.Tema)
+                entity.HasOne(d => d.Usuario)
                     .WithMany(p => p.Pregunta)
-                    .HasForeignKey(d => d.Temaid)
-                    .HasConstraintName("FK_PREGUNTA_TEMA");
+                    .HasForeignKey(d => d.Usuarioid)
+                    .HasConstraintName("FK_PREGUNTA_PREGUNTA");
             });
 
             modelBuilder.Entity<Respuesta>(entity =>
@@ -61,12 +65,27 @@ namespace BLOGLIBRES.Models
                     .HasColumnName("CONTENIDO")
                     .HasMaxLength(4000);
 
+                entity.Property(e => e.Fecha)
+                    .HasColumnName("FECHA")
+                    .HasColumnType("datetime");
+
                 entity.Property(e => e.Preguntaid).HasColumnName("PREGUNTAID");
+
+                entity.Property(e => e.Titulo)
+                    .HasColumnName("TITULO")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Usuarioid).HasColumnName("USUARIOID");
 
                 entity.HasOne(d => d.Pregunta)
                     .WithMany(p => p.Respuesta)
                     .HasForeignKey(d => d.Preguntaid)
                     .HasConstraintName("FK_RESPUESTA_PREGUNTA");
+
+                entity.HasOne(d => d.Usuario)
+                    .WithMany(p => p.Respuesta)
+                    .HasForeignKey(d => d.Usuarioid)
+                    .HasConstraintName("FK_RESPUESTA_USUARIO");
             });
 
             modelBuilder.Entity<Tema>(entity =>
@@ -77,6 +96,23 @@ namespace BLOGLIBRES.Models
 
                 entity.Property(e => e.Nombre)
                     .HasColumnName("NOMBRE")
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.ToTable("USUARIO");
+
+                entity.Property(e => e.Usuarioid)
+                    .HasColumnName("USUARIOID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Nombre)
+                    .HasColumnName("NOMBRE")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Rol)
+                    .HasColumnName("ROL")
                     .HasMaxLength(50);
             });
         }

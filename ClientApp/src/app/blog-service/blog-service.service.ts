@@ -22,11 +22,15 @@ export class BlogServiceService {
   CargarTema(){
     return this.http.get(this.host+'/Blog/ListaTema');
   }
-  GuardarPregunta(temaid:any, pregunta1:any, estado:any){
+  CargarPreguntas(){
+    return this.http.get(this.host+'/Blog/TodasPreguntas');
+  }
+  GuardarPregunta( pregunta1:any, estado:any, usuarioid:number){
     var pregunta={
-      Temaid:temaid,
+     
       Pregunta1:pregunta1,
-      Estado:estado
+      Estado:estado,
+      usuarioid:usuarioid
     }
     return this.http.post(this.host+'/Blog/AddPregunta/', pregunta);
   }
@@ -34,9 +38,7 @@ export class BlogServiceService {
   CargarPreguntaF(temaid:any){
     return this.http.get(this.host+'/Blog/ListaPF/'+temaid);
   }
-  CargarPreguntaT(temaid:any){
-    return this.http.get(this.host+'/Blog/ListaPT/'+temaid);
-  }
+
  
 
 
