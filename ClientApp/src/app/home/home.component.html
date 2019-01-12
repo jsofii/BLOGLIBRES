@@ -39,13 +39,12 @@
   <div class="panel panel-info">
     <div class="panel-heading " style=" height:  50px">
       TEMAS DISPONIBLES
-          
-        <button  class="btn btn-success center-block pull-right" data-toggle="modal" data-target="#myModal"><i
-            class="fa fa-plus-circle"></i>
-          Nuevo tema</button>
+
+      <button class="btn btn-success center-block pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i>
+        Nuevo tema</button>
 
 
-     
+
     </div>
     <div class="panel-body ">
       <div class=" col-lg-12">
@@ -53,9 +52,9 @@
           <thead>
             <tr>
               <th>NOMBRE</th>
-              <td>COMENZADO POR </td> 
+              <td>COMENZADO POR </td>
               <td>FECHA CREACIÓN</td>
-           
+
               <td>ESTADO</td>
               <td>ACCIONES</td>
             </tr>
@@ -65,23 +64,26 @@
               <td>{{item.pregunta1}}</td>
               <td>{{item.nombre}}</td>
               <td>{{item.fecha | date:'medium' }}</td>
-             
+
               <td *ngIf="item.estado">
-                  <h5 style="color:rgb(14, 114, 43); font-weight: bold;">ACTIVO</h5>
+                <h5 style="color:rgb(14, 114, 43); font-weight: bold;">ACTIVO</h5>
               </td>
               <td *ngIf="!item.estado">
-                  <h5 style="color:rgb(197, 5, 5); font-weight: bold;">NO ACTIVO</h5>      
-          </td>
+                <h5 style="color:rgb(197, 5, 5); font-weight: bold;">NO ACTIVO</h5>
+              </td>
               <td *ngIf="item.estado">
-                <button (click)="CerrarTema(item.preguntaid)"  class="btn btn-info">Cerrar tema</button>
-                <button [routerLink]='["/gestion-respuesta/", item.preguntaid, this.idusuario]' class="btn btn-success">INGRESAR</button>
+                <button (click)="CerrarTema(item.preguntaid)" class="btn btn-info">Cerrar tema</button>
+                <button  class="btn btn-danger">Eliminar</button>
+                <button [routerLink]='["/gestion-respuesta/", item.preguntaid, this.idusuario]' class="btn btn-active glyphicon glyphicon-circle-arrow-right"></button>
               </td>
               <td *ngIf="!item.estado">
-                  <button (click)=" ActivarTema(item.preguntaid)"  class="btn btn-info">Cerrar tema</button>
-                  <button [routerLink]='["/gestion-respuesta/", item.preguntaid, this.idusuario]' class="btn btn-success">INGRESAR</button>
-                </td>
+                <button (click)="ActivarTema(item.preguntaid)" class="btn btn-info">Activar tema</button>
+                <button  class="btn btn-danger">Eliminar</button>
+                <button [routerLink]='["/gestion-respuesta/", item.preguntaid, this.idusuario]' class="btn btn-active glyphicon glyphicon-circle-arrow-right"></button>
+              </td>
               
-              
+
+
             </tr>
 
           </tbody>
