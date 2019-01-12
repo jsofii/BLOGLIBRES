@@ -50,6 +50,26 @@ namespace _1.Libres.Controllers
             return query.ToList();
          
         }
+        [HttpPut]
+        [Route("cerrarTema")]
+        public List<Pregunta> ListaTemaTodos([FromBody]Pregunta comTemp)
+        {   
+            Pregunta paux=this.context.Pregunta.Find(comTemp.Preguntaid);
+            paux.Estado=false;
+            context.SaveChanges();
+
+            return this.context.Pregunta.ToList();
+        }
+        [HttpPut]
+        [Route("activarTema")]
+        public List<Pregunta> activar([FromBody]Pregunta comTemp)
+        {   
+            Pregunta paux=this.context.Pregunta.Find(comTemp.Preguntaid);
+            paux.Estado=true;
+            context.SaveChanges();
+
+            return this.context.Pregunta.ToList();
+        }
         [HttpGet]
         [Route("ListaPTodos")]
         public List<Pregunta> ListaTemaTodos()

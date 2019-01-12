@@ -28,11 +28,28 @@ export class HomeComponent {
   GuardarTema(){
     this.blogService.GuardarPregunta(this.contenidoPregunta,true, this.idusuario).subscribe(
       data=>{
-        
+        this.CargarPreguntas();
       },
       error=>{
         alert("Error al guardar tema");
       }
     )
+  }
+  CerrarTema(temid:number){
+    this.blogService.CerrarTema(temid).subscribe(
+      data=>{
+        this.CargarPreguntas();
+      },
+      error=>{
+        alert("no se pudo borrar el tema seleccionado");
+      }
+    )
+  }
+  ActivarTema(temaid:number){
+    this.blogService.ActivarTema(temaid).subscribe(
+      data=>{
+        this.CargarPreguntas();
+      }
+    );
   }
 }

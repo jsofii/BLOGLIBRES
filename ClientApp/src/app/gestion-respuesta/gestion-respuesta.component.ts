@@ -12,12 +12,36 @@ export class GestionRespuestaComponent implements OnInit {
   idPregunta:any;
   tieneRespuesta:any;
   contenido:string;
+  titulorespuesta:string;
+  imagenrespuesta:string="sinImagen";
+  imagenrespuesta2:string="sinImagen";
+  videorespuesta:string="sinVideo";
+  addimagen:string="sinImagen";
+  addvideo:string="videoSfz.mp4";
+  idusuario:number=0;
+  fecha:Date;
+  
   constructor(private rutaActiva: ActivatedRoute, private gestionService: GestionService) { 
     this.idPregunta= this.rutaActiva.snapshot.params.idPregunta;
     this.tieneRespuesta=this.rutaActiva.snapshot.params.tieneRespuesta;
+    this.idusuario=this.rutaActiva.snapshot.params.idusuario;
     this.CargarRespuestas();
     this.CargarPregunta();
   }
+  elegirImagen(event){
+    const file = event.target.files[0];
+    this.addimagen=file.name;
+    console.log(this.addimagen);
+  }
+  elegirVideo(event){
+    const file= event.target.files[0];
+    this.addvideo=file.name;
+
+  }
+  SeleccionarImagen(imagen:string){
+    this.imagenrespuesta=imagen;
+  }
+ 
   //Función que carga las Respuestas de una pregunta
   listaRespuestas:any;
   CargarRespuestas(){
@@ -39,10 +63,10 @@ export class GestionRespuestaComponent implements OnInit {
     )
   }
   IngresarRespuesta(){
-    this.gestionService.GuardarRespuesta(this.contenido, this.idPregunta).subscribe(
+    this.gestionService.GuardarRespuesta(this.contenido, this.idPregunta, this.titulorespuesta, this.idusuario, this.addimagen,this.addvideo).subscribe(
       data=>{
         this.CargarRespuestas();
-        this.CambiarEstado();
+       
         this.contenido="";
       }
       

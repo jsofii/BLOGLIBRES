@@ -11,6 +11,8 @@ namespace BLOGLIBRES.Models
         public string Titulo { get; set; }
         public int? Usuarioid { get; set; }
         public DateTime? Fecha { get; set; }
+        public string Imagen { get; set; }
+        public string Video { get; set; }
 
         public Pregunta Pregunta { get; set; }
         public Usuario Usuario { get; set; }

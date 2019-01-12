@@ -32,12 +32,12 @@ import{HomeService} from './home-service/home-service.service';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: 'home/:idusuario', component:HomeComponent},
+      {path: 'home/:idusuario/:nombre/:rol', component:HomeComponent},
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'home', component: HomeComponent },
       { path: 'blog/:id', component: BlogComponent },
-      { path: 'gestion-respuesta/:idPregunta', component: GestionRespuestaComponent}
+      { path: 'gestion-respuesta/:idPregunta/:idusuario', component: GestionRespuestaComponent}
     ])
   ],
   providers: [BlogServiceService, GestionService, HomeService],

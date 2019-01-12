@@ -63,19 +63,27 @@ namespace BLOGLIBRES.Models
 
                 entity.Property(e => e.Contenido)
                     .HasColumnName("CONTENIDO")
-                    .HasMaxLength(4000);
+                    .HasMaxLength(400);
 
                 entity.Property(e => e.Fecha)
                     .HasColumnName("FECHA")
                     .HasColumnType("datetime");
 
+                entity.Property(e => e.Imagen)
+                    .HasColumnName("IMAGEN")
+                    .HasMaxLength(40);
+
                 entity.Property(e => e.Preguntaid).HasColumnName("PREGUNTAID");
 
                 entity.Property(e => e.Titulo)
                     .HasColumnName("TITULO")
-                    .HasMaxLength(50);
+                    .HasMaxLength(400);
 
                 entity.Property(e => e.Usuarioid).HasColumnName("USUARIOID");
+
+                entity.Property(e => e.Video)
+                    .HasColumnName("VIDEO")
+                    .HasMaxLength(40);
 
                 entity.HasOne(d => d.Pregunta)
                     .WithMany(p => p.Respuesta)

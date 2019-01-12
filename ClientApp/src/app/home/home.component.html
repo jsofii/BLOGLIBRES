@@ -39,7 +39,7 @@
   <div class="panel panel-info">
     <div class="panel-heading " style=" height:  50px">
       TEMAS DISPONIBLES
-     
+          
         <button  class="btn btn-success center-block pull-right" data-toggle="modal" data-target="#myModal"><i
             class="fa fa-plus-circle"></i>
           Nuevo tema</button>
@@ -64,16 +64,24 @@
             <tr *ngFor="let item of listaTemas">
               <td>{{item.pregunta1}}</td>
               <td>{{item.nombre}}</td>
-              <td>{{item.fecha}}</td>
-              <td>{{item.estado}}</td>
-              <td>botones</td>
-              
-              <td></td>
-              <div class="pull-right">
-                <td>
-                  <button [routerLink]='["/gestion-respuesta/", item.temaid]' class="btn btn-success">INGRESAR</button>
+              <td>{{item.fecha | date:'medium' }}</td>
+             
+              <td *ngIf="item.estado">
+                  <h5 style="color:rgb(14, 114, 43); font-weight: bold;">ACTIVO</h5>
+              </td>
+              <td *ngIf="!item.estado">
+                  <h5 style="color:rgb(197, 5, 5); font-weight: bold;">NO ACTIVO</h5>      
+          </td>
+              <td *ngIf="item.estado">
+                <button (click)="CerrarTema(item.preguntaid)"  class="btn btn-info">Cerrar tema</button>
+                <button [routerLink]='["/gestion-respuesta/", item.preguntaid, this.idusuario]' class="btn btn-success">INGRESAR</button>
+              </td>
+              <td *ngIf="!item.estado">
+                  <button (click)=" ActivarTema(item.preguntaid)"  class="btn btn-info">Cerrar tema</button>
+                  <button [routerLink]='["/gestion-respuesta/", item.preguntaid, this.idusuario]' class="btn btn-success">INGRESAR</button>
                 </td>
-              </div>
+              
+              
             </tr>
 
           </tbody>

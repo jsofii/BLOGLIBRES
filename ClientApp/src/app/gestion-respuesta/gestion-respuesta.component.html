@@ -1,10 +1,11 @@
 <div class="panel panel-info container">
-  <div class="panel-heading">TEMA  {{preguntaNombre}}</div>
+  <div class="panel-heading">TEMA {{preguntaNombre}}</div>
   <div class="panel-body">
     <div class="col-lg-8"></div>
     <div class="col-lg-4"></div>
     <div>
       <h1 for="">{{preguntaNombre}}</h1>
+      <a class="pull-right">Numero respuestas <span style="size: 15px" class="badge">{{listaRespuestas.length}}</span></a>
     </div>
     <table class="table">
       <thead>
@@ -14,28 +15,51 @@
       </thead>
       <tbody>
         <tr class="active" *ngFor="let item of listaRespuestas">
-          <div style="margin-top: 10px">
+          <td>
+          <div class="active" style="margin-top: 10px">
             <div class="col-lg-8">
-            <textarea class="form-control" rows="5" id="comment">
+                <div class="form-group">
+                 
+                    <label for="pwd">Titulo:</label>
+                 
+                    <input type="text" class="form-control" id="pwd"  [(ngModel)]="titulorespuesta" >
+                  </div>
+              <textarea class="form-control" rows="5" id="comment">
               {{item.contenido}}
             </textarea>
-          </div>
-          <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
               <div class="form-group">
-                  <label class="control-label col-sm-2" for="email">Usuario:</label>
-                  <div class="col-sm-10">
-                    <p class="form-control-static">sofia</p>
-                  </div>
-                  <label class="control-label col-sm-2" for="email">Fecha:</label>
-                  <div class="col-sm-10">
-                    <p class="form-control-static">2/10/11</p>
-                    <button (click)="DeleteRespuesta(item.respuestaid)" class="btn btn-danger pull-right glyphicon glyphicon-remove-circle" style="margin:5px 0px 0px 83%"> ELIMINAR</button>
-                  </div>
-                  
+                <label class="control-label col-sm-2" for="email">Usuario:</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static">{{item.nombre}}</p>
                 </div>
+                <label class="control-label col-sm-2" for="email">Fecha:</label>
+                <div class="col-sm-10">
+                  <p class="form-control-static">{{item.fecha | date:'medium'}}</p>
+                  <button (click)="DeleteRespuesta(item.respuestaid)" class="btn btn-danger pull-right glyphicon glyphicon-remove-circle"
+                    style="margin:5px 0px 0px 83%"> ELIMINAR</button>
+                </div>
+
+              </div>
+              <!-- <div >
+               
+                  <button  (click)="SeleccionarVideo(item.video)" type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{item.respuestaid}}">Simple collapsible</button>
+                  <div id="{{item.respuestaid}}" class="collapse">
+                   
+                  </div>
+              </div>
+              <div >
+                  <button  (click)="SeleccionarImagen(item.imagen)" type="button" class="btn btn-info" data-toggle="collapse" data-target="#imagen">Simple collapsible</button>
+                  <div id="{{}}}" class="collapse">
+
+                      <img src="../../assets/imagenes/{{imagenrespuesta}}" style="width: 300px;">
+                  </div>
+              </div> -->
+            </div>
+
           </div>
-           
-          </div>
+        </td>
         </tr>
 
       </tbody>
@@ -44,12 +68,116 @@
 
 
       <div class="form-group">
-        <h3 for="comment">Nueva respuesta:</h3>
-        <textarea [(ngModel)]="contenido" class="form-control" rows="5" id="comment"></textarea>
+        <div class="col-lg-12">
+          <legend for="comment">Nueva respuesta:
+            <div class="col-lg-3 pull-right">
+              <label for="">Adjuntar</label>
+              <button  class="btn btn-success " data-toggle="modal" data-target="#addimage">imagen</button>
+              <button class="btn btn-success "  data-toggle="modal" data-target="#addvideo">video</button>
+            </div>
+            
+          </legend>
+        </div>
+      
+        <div class="form-group">
+            <label for="pwd">Titulo:</label>
+            <input type="text" class="form-control" id="pwd"  [(ngModel)]="titulorespuesta">
+          </div>
+
+
+
+        <textarea [(ngModel)]="contenido" class="form-control" rows="5" id="comment" style="margin-top: 5px">
+
+
+        </textarea>
       </div>
       <button (click)="IngresarRespuesta()" style="margin-top: 20px" class="btn btn-success">INGRESAR</button>
-      <button [routerLink]='["/home"]' class="btn btn-danger  pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button>
+      <button [routerLink]='["/home/1/sofi/admin"]' class="btn btn-danger  pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button>
     </div>
 
   </div>
+</div>
+<div class="modal fade" id="addimage" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Añada una imagen</h4>
+      </div>
+      <div class="modal-body">
+          <input type="file" (change)="elegirImagen($event)">
+          <div >
+            <img src="../../assets/imagenes/{{addimagen}}" style="width: 300px;">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="modal fade" id="addvideo" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Añada un video</h4>
+          </div>
+          <div class="modal-body">
+              <input type="file" (change)="elegirVideo($event)">
+              <h1>video selecciond {{addvideo}}</h1>
+              <video width="100%" height="100%" loop controls style="background-color: #000 !important;">
+                <source src="../../assets/videos/{{addvideo}}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+</div>
+<div class="modal fade" id="viewimage" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Añada una imagen</h4>
+          </div>
+          <div class="modal-body">
+              <input type="file" (change)="elegirImagen($event)">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+</div>
+<div class="modal fade" id="viewvideo" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Añada una imagen</h4>
+          </div>
+          <div class="modal-body">
+              <input type="file" (change)="elegirImagen($event)">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
 </div>

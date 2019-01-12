@@ -34,7 +34,21 @@ export class BlogServiceService {
     }
     return this.http.post(this.host+'/Blog/AddPregunta/', pregunta);
   }
+  CerrarTema(preguntaid:number){
+    var pregunta={
+     
+     Preguntaid:preguntaid,
+    }
+    return this.http.put(this.host + '/Blog/cerrarTema/',pregunta);
+  }
   
+  ActivarTema(preguntaid:number){
+    var pregunta={
+     
+     Preguntaid:preguntaid,
+    }
+    return this.http.put(this.host + '/Blog/activarTema/',pregunta);
+  }
   CargarPreguntaF(temaid:any){
     return this.http.get(this.host+'/Blog/ListaPF/'+temaid);
   }
