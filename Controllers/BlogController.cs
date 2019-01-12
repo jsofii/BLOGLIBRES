@@ -6,18 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using BLOGLIBRES.Models;
 namespace _1.Libres.Controllers
 {
-   
-    public class Temas{
-         public int Preguntaid { get; set; }
+
+    public class Temas
+    {
+        public int Preguntaid { get; set; }
         public string Pregunta1 { get; set; }
         public bool? Estado { get; set; }
         public int? Usuarioid { get; set; }
         public string Nombre { get; set; }
         public string Rol { get; set; }
-          public DateTime? Fecha { get; set; }
+        public DateTime? Fecha { get; set; }
 
     }
-     [Route("api/[controller]")]
+    [Route("api/[controller]")]
     public class BlogController : Controller
     {
         FBSLibresContext context = new FBSLibresContext();
@@ -33,29 +34,29 @@ namespace _1.Libres.Controllers
         {
             var query = from com in context.Pregunta
                         join prov in context.Usuario on com.Usuarioid equals prov.Usuarioid
-                        
+
                         select new Temas
                         {
-                            Preguntaid=com.Preguntaid,
-                            Pregunta1=com.Pregunta1,
-                            Estado=com.Estado,
-                            Usuarioid=com.Usuarioid,
-                            Nombre=prov.Nombre,
-                            Rol=prov.Rol,
-                            Fecha= com.Fecha
+                            Preguntaid = com.Preguntaid,
+                            Pregunta1 = com.Pregunta1,
+                            Estado = com.Estado,
+                            Usuarioid = com.Usuarioid,
+                            Nombre = prov.Nombre,
+                            Rol = prov.Rol,
+                            Fecha = com.Fecha
 
 
                         };
 
             return query.ToList();
-         
+
         }
         [HttpPut]
         [Route("cerrarTema")]
         public List<Pregunta> ListaTemaTodos([FromBody]Pregunta comTemp)
-        {   
-            Pregunta paux=this.context.Pregunta.Find(comTemp.Preguntaid);
-            paux.Estado=false;
+        {
+            Pregunta paux = this.context.Pregunta.Find(comTemp.Preguntaid);
+            paux.Estado = false;
             context.SaveChanges();
 
             return this.context.Pregunta.ToList();
@@ -63,9 +64,9 @@ namespace _1.Libres.Controllers
         [HttpPut]
         [Route("activarTema")]
         public List<Pregunta> activar([FromBody]Pregunta comTemp)
-        {   
-            Pregunta paux=this.context.Pregunta.Find(comTemp.Preguntaid);
-            paux.Estado=true;
+        {
+            Pregunta paux = this.context.Pregunta.Find(comTemp.Preguntaid);
+            paux.Estado = true;
             context.SaveChanges();
 
             return this.context.Pregunta.ToList();
@@ -100,15 +101,31 @@ namespace _1.Libres.Controllers
         {
             Pregunta nivel = new Pregunta
             {
-               
+
                 Pregunta1 = comTemp.Pregunta1,
                 Estado = comTemp.Estado,
-                Usuarioid= comTemp.Usuarioid,
-                Fecha=DateTime.Now
+                Usuarioid = comTemp.Usuarioid,
+                Fecha = DateTime.Now
             };
             context.Pregunta.Add(nivel);
             context.SaveChanges();
             return context.Pregunta.ToList();
         }
+
+
+        [HttpDelete]
+        [Route("EliminarPregunta/{idpregunta}")]
+        public List<Pregunta> Eliminarpregunta(int idpregunta)
+        {
+            Pregunta pr = new Pregunta
+            {
+                Preguntaid = idpregunta
+            };
+
+            context.Remove(pr);
+            context.SaveChanges();
+            return context.Pregunta.ToList();
+        }
+
     }
 }

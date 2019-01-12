@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { GestionService} from '../gestion-service/gestion-service.service';
+import { GestionService } from '../gestion-service/gestion-service.service';
 
 
 @Component({
@@ -9,73 +9,92 @@ import { GestionService} from '../gestion-service/gestion-service.service';
   styleUrls: ['./gestion-respuesta.component.css']
 })
 export class GestionRespuestaComponent implements OnInit {
-  idPregunta:any;
-  tieneRespuesta:any;
-  contenido:string;
-  titulorespuesta:string;
-  imagenrespuesta:string="sinImagen";
-  imagenrespuesta2:string="sinImagen";
-  videorespuesta:string="sinVideo";
-  addimagen:string="sinImagen";
-  addvideo:string="videoSfz.mp4";
-  idusuario:number=0;
-  fecha:Date;
-  
-  constructor(private rutaActiva: ActivatedRoute, private gestionService: GestionService) { 
-    this.idPregunta= this.rutaActiva.snapshot.params.idPregunta;
-    this.tieneRespuesta=this.rutaActiva.snapshot.params.tieneRespuesta;
-    this.idusuario=this.rutaActiva.snapshot.params.idusuario;
+  idPregunta: any;
+  tieneRespuesta: any;
+  contenido: string;
+  titulorespuesta: string;
+  imagenrespuesta: string = "sinImagen";
+  imagenrespuesta2: string = "sinImagen";
+  videorespuesta: string = "sinVideo";
+
+  addimagen: string = null;
+  addvideo: string = null;
+
+  idusuario: number = 0;
+  fecha: Date;
+
+  constructor(private rutaActiva: ActivatedRoute, private gestionService: GestionService) {
+    this.idPregunta = this.rutaActiva.snapshot.params.idPregunta;
+    this.tieneRespuesta = this.rutaActiva.snapshot.params.tieneRespuesta;
+    this.idusuario = this.rutaActiva.snapshot.params.idusuario;
     this.CargarRespuestas();
     this.CargarPregunta();
   }
-  elegirImagen(event){
+
+
+  elegirImagen(event) {
     const file = event.target.files[0];
-    this.addimagen=file.name;
-    console.log(this.addimagen);
-  }
-  elegirVideo(event){
-    const file= event.target.files[0];
-    this.addvideo=file.name;
+
+    this.addimagen = file.name;
+
+
 
   }
-  SeleccionarImagen(imagen:string){
-    this.imagenrespuesta=imagen;
+
+
+  elegirVideo(event) {
+    const file = event.target.files[0];
+
+    this.addvideo = file.name;
+
+
+
   }
- 
+
+
+  SeleccionarImagen(imagen: string) {
+    this.imagenrespuesta = imagen;
+  }
+
   //Función que carga las Respuestas de una pregunta
-  listaRespuestas:any;
-  CargarRespuestas(){
+  listaRespuestas: any;
+  totalrespuestas: number = 0;
+  CargarRespuestas() {
     this.gestionService.CargarRespuestas(this.idPregunta).subscribe(
-      data=>{
-        this.listaRespuestas=data;
+      data => {
+        this.listaRespuestas = data;
+        this.totalrespuestas = this.listaRespuestas.length;
       }
     )
-    
+
   }
-  preguntaNombre:any;
-  pregunta:any;
-  CargarPregunta(){
+  preguntaNombre: any;
+  pregunta: any;
+  CargarPregunta() {
     this.gestionService.ObtenerPregunta(this.idPregunta).subscribe(
-      data=>{
-        this.pregunta=data;
-        this.preguntaNombre=this.pregunta.pregunta1;
+      data => {
+        this.pregunta = data;
+        this.preguntaNombre = this.pregunta.pregunta1;
       }
     )
   }
-  IngresarRespuesta(){
-    this.gestionService.GuardarRespuesta(this.contenido, this.idPregunta, this.titulorespuesta, this.idusuario, this.addimagen,this.addvideo).subscribe(
-      data=>{
+  IngresarRespuesta() {
+    this.gestionService.GuardarRespuesta(this.contenido, this.idPregunta, this.titulorespuesta, this.idusuario, this.addimagen, this.addvideo).subscribe(
+      data => {
         this.CargarRespuestas();
-       
-        this.contenido="";
+
+        this.contenido = "";
+        this.addimagen = null;
+        this.addvideo = null;
+
       }
-      
+
     );
-   
+
   }
-  CambiarEstado(){
+  CambiarEstado() {
     this.gestionService.CambiarEstado(this.idPregunta).subscribe(
-      data=>{
+      data => {
 
       }
     )

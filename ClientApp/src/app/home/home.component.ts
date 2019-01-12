@@ -52,4 +52,13 @@ export class HomeComponent {
       }
     );
   }
+
+
+  EliminarTema(temaid:number){
+      this.blogService.EliminarTema(temaid).subscribe(
+        data=>{
+          this.CargarPreguntas();
+        }
+      );
+  }
 }
