@@ -53,6 +53,10 @@ export class BlogServiceService {
     return this.http.get(this.host+'/Blog/ListaPF/'+temaid);
   }
 
+
+  EliminarTema(idpregunta:number){
+    return this.http.delete(this.host+'/Blog/EliminarPregunta/'+idpregunta);
+  }
  
 
 
