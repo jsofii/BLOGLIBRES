@@ -74,12 +74,12 @@
               <td *ngIf="item.estado">
                 <button (click)="CerrarTema(item.preguntaid)" [disabled]="item.nombre!=nombre" class="btn btn-info">Cerrar tema</button>
                 <button  (click)="EliminarTema(item.preguntaid)" [disabled]="item.nombre!=nombre" class="btn btn-danger">Eliminar</button>
-                <button [routerLink]='["/gestion-respuesta/", item.preguntaid, idusuario, nombre, rol]' class="btn btn-active glyphicon glyphicon-circle-arrow-right"></button>
+                <button [routerLink]='["/gestion-respuesta/", item.preguntaid, idusuario, nombre, rol, 1]' class="btn btn-active glyphicon glyphicon-circle-arrow-right"></button>
               </td>
               <td *ngIf="!item.estado">
                 <button (click)="ActivarTema(item.preguntaid)" [disabled]="item.nombre!=nombre" class="btn btn-info">Activar tema</button>
                 <button  class="btn btn-danger" [disabled]="item.nombre!=nombre">Eliminar</button>
-                <button [routerLink]='["/gestion-respuesta/", item.preguntaid, idusuario, nombre, rol]' class="btn btn-active glyphicon glyphicon-circle-arrow-right"></button>
+                <button  [routerLink]='["/gestion-respuesta/", item.preguntaid, idusuario, nombre, rol, 0]' class="btn btn-active glyphicon glyphicon-circle-arrow-right"></button>
               </td>
               
 

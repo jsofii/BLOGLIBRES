@@ -24,7 +24,8 @@ export class GestionRespuestaComponent implements OnInit {
   nombre:string;
   rol:string;
   fecha:Date;
-  
+  estado:any;
+  desactivar:boolean=false;
   
   constructor(private rutaActiva: ActivatedRoute, private gestionService: GestionService) { 
     this.idPregunta= this.rutaActiva.snapshot.params.idPregunta;
@@ -32,6 +33,12 @@ export class GestionRespuestaComponent implements OnInit {
     this.idusuario=this.rutaActiva.snapshot.params.idusuario;
     this.nombre=this.rutaActiva.snapshot.params.nombre;
     this.rol=this.rutaActiva.snapshot.params.rol;
+    this.estado=this.rutaActiva.snapshot.params.estado;
+    if(this.estado=="1"){
+      this.desactivar=false;
+    }else{
+      this.desactivar=true;
+    }
     this.CargarRespuestas();
     this.CargarPregunta();
   }
