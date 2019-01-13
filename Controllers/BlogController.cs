@@ -27,6 +27,17 @@ namespace _1.Libres.Controllers
         {
             return this.context.Tema.ToList();
         }
+        [HttpPost]
+        [Route("ExisteUsuario")]
+        public List<Usuario> existeUsaurio([FromBody]Usuario usr)
+        {
+            Usuario aux= this.context.Usuario.Find(usr.Usuarioid);
+            if(aux==null){
+                this.context.Add(usr);
+                this.context.SaveChanges();
+            }
+            return this.context.Usuario.ToList();
+        }
         [HttpGet]
         [Route("TodasPreguntas")]
         public List<Temas> TodasPreguntas()

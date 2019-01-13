@@ -17,10 +17,15 @@ export class HomeComponent {
   rol:string;
   
   constructor(private rutaActiva: ActivatedRoute, private homeService: HomeService, private blogService:BlogServiceService){
-    this.CargarPreguntas();
+    
     this.idusuario=this.rutaActiva.snapshot.params.idusuario;
     this.nombre=this.rutaActiva.snapshot.params.nombre;
     this.rol=this.rutaActiva.snapshot.params.rol;
+    this.blogService.ExisteUsuario(this.idusuario, this.nombre, this.rol).subscribe(
+      data=>{
+        this.CargarPreguntas();
+      }
+    )
   }
   
   CargarPreguntas(){

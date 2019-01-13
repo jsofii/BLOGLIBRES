@@ -25,6 +25,14 @@ export class BlogServiceService {
   CargarPreguntas(){
     return this.http.get(this.host+'/Blog/TodasPreguntas');
   }
+  ExisteUsuario(idusuario, nombre, rol){
+    var usr={
+      Usuarioid:idusuario,
+      Nombre:nombre,
+      Rol:rol
+    }
+    return this.http.post(this.host+'/Blog/ExisteUsuario', usr);
+  }
   GuardarPregunta( pregunta1:any, estado:any, usuarioid:number){
     var pregunta={
      
