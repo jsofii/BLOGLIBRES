@@ -1,13 +1,21 @@
 <?php
 session_start();
-// if (@!$_SESSION['usuario']) {
-//     header("Location:../../index.php");
-// } elseif ($_SESSION['tipo_usuario'] == 'EST') {
-// //header("Location:index2.php");
-//     echo "eres estudiante";
-// } elseif ($_SESSION['tipo_usuario'] == 'ADM') {
-//     echo "eres administrador";
-// }
+$id;
+$nombre;
+$rol;
+if ($_SESSION['usuario']=='admin') {
+    $id='1';
+    $nombre='sofi';
+    $rol='admin';   
+} elseif ($_SESSION['tipo_usuario'] == 'EST') {
+    $id=$_SESSION['id'];
+    $nombre=$_SESSION['usuario'];
+    $rol='estudiante';
+} elseif ($_SESSION['tipo_usuario'] == 'PRO') {
+    $id=$_SESSION['id'];
+    $nombre=$_SESSION['usuario'];
+    $rol='profesor';
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
@@ -85,7 +93,9 @@ session_start();
                     <ul class="nav navbar-nav">
                         <li><a href="../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
                         <li class="active"><a href="../modulos_profesor/pro_buscar.php">Buscar</a></li>
-                        <li><a href="https://localhost:5001/" >Blog</a></li>
+                        <?php
+                        echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Blog</a></li>';
+                        ?>
                         <li><a href="../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

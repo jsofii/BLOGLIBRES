@@ -1,12 +1,20 @@
 <?php
 session_start();
-if (@!$_SESSION['usuario']) {
-    header("Location:../../index.php");
+$id;
+$nombre;
+$rol;
+if ($_SESSION['usuario']=='admin') {
+    $id='1';
+    $nombre='sofi';
+    $rol='admin';   
 } elseif ($_SESSION['tipo_usuario'] == 'EST') {
-    //header("Location:index2.php");
-    echo "eres estudiante";
+    $id=$_SESSION['id'];
+    $nombre=$_SESSION['usuario'];
+    $rol='estudiante';
 } elseif ($_SESSION['tipo_usuario'] == 'PRO') {
-    echo "eres PROFESOR";
+    $id=$_SESSION['id'];
+    $nombre=$_SESSION['usuario'];
+    $rol='profesor';
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
