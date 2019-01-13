@@ -1,3 +1,21 @@
+<?php
+$id;
+$nombre;
+$rol;
+if ($_SESSION['usuario']=='admin') {
+    $id='1';
+    $nombre='sofi';
+    $rol='admin';   
+} elseif ($_SESSION['tipo_usuario'] == 'EST') {
+    $id=$_SESSION['id'];
+    $nombre=$_SESSION['usuario'];
+    $rol='estudiante';
+} elseif ($_SESSION['tipo_usuario'] == 'PRO') {
+    $id=$_SESSION['id'];
+    $nombre=$_SESSION['usuario'];
+    $rol='profesor';
+}
+?>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -20,7 +38,9 @@
                 </li>
                 <li><a href="adm_buscar_profesores.php">Gestionar profesores</a></li>
                 <li><a href="adm_buscar_estudiantes.php">Gestionar Estudiantes</a></li>
-                <li><a href="https://localhost:5001/" >Blog</a></li>
+                <?php
+                echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Blog</a></li>';
+                ?>
                 <li><a href="adm_herramientas.php">Herramientas</a></li>
                 <li ><a href="adm_encuesta.php">Resultados evaluación sistema.</a></li>
             </ul>
