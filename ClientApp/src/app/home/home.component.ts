@@ -13,9 +13,14 @@ export class HomeComponent {
   listaTemas:any;
   idusuario:number;
   contenidoPregunta:any;
+  nombre:string;
+  rol:string;
+  
   constructor(private rutaActiva: ActivatedRoute, private homeService: HomeService, private blogService:BlogServiceService){
     this.CargarPreguntas();
     this.idusuario=this.rutaActiva.snapshot.params.idusuario;
+    this.nombre=this.rutaActiva.snapshot.params.nombre;
+    this.rol=this.rutaActiva.snapshot.params.rol;
   }
   
   CargarPreguntas(){

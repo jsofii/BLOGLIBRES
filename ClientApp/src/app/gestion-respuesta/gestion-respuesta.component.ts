@@ -19,12 +19,17 @@ export class GestionRespuestaComponent implements OnInit {
   addimagen:string="sinImagen";
   addvideo:string="sinVideo";
   idusuario:number=0;
+  nombre:string;
+  rol:string;
   fecha:Date;
+  
   
   constructor(private rutaActiva: ActivatedRoute, private gestionService: GestionService) { 
     this.idPregunta= this.rutaActiva.snapshot.params.idPregunta;
     this.tieneRespuesta=this.rutaActiva.snapshot.params.tieneRespuesta;
     this.idusuario=this.rutaActiva.snapshot.params.idusuario;
+    this.nombre=this.rutaActiva.snapshot.params.nombre;
+    this.rol=this.rutaActiva.snapshot.params.rol;
     this.CargarRespuestas();
     this.CargarPregunta();
   }
