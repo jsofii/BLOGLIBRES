@@ -110,5 +110,19 @@ namespace _1.Libres.Controllers
             context.SaveChanges();
             return context.Pregunta.ToList();
         }
+
+         [HttpDelete]
+        [Route("EliminarPregunta/{idpregunta}")]
+        public List<Pregunta> Eliminarpregunta(int idpregunta)
+        {
+            Pregunta pr = new Pregunta
+            {
+                Preguntaid = idpregunta
+            };
+
+            context.Remove(pr);
+            context.SaveChanges();
+            return context.Pregunta.ToList();
+        }
     }
 }

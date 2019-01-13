@@ -5,7 +5,7 @@
     <div class="col-lg-4"></div>
     <div>
       <h1 for="">{{preguntaNombre}}</h1>
-      <a class="pull-right">Numero respuestas <span style="size: 15px" class="badge">{{listaRespuestas.length}}</span></a>
+      <a class="pull-right">Numero respuestas <span style="size: 15px" class="badge">{{totalrespuestas}}</span></a>
     </div>
     <table class="table">
       <thead>
@@ -37,10 +37,27 @@
                 <label class="control-label col-sm-2" for="email">Fecha:</label>
                 <div class="col-sm-10">
                   <p class="form-control-static">{{item.fecha | date:'medium'}}</p>
-                  <button (click)="DeleteRespuesta(item.respuestaid)" class="btn btn-danger pull-right glyphicon glyphicon-remove-circle"
-                    style="margin:5px 0px 0px 83%"> ELIMINAR</button>
+                  
                 </div>
 
+
+                <div *ngIf="item.imagen!=null || item.video!=null; then mostrarcontenido else sincontenido"></div>
+                <ng-template #sincontenido><p style="color:red; margin:5px 0px 0px 40%">Esta respuesta no tiene contenido multimedia adjunto.</p></ng-template>
+                <ng-template #mostrarcontenido>
+                  <a href="#demo{{item.respuestaid}}" class="btn btn-info pull-right" data-toggle="collapse" style="margin:5px 0px 0px 50%">Mostrar contenido
+                    multimedia adjunto.</a>
+                  <div id="demo{{item.respuestaid}}" class="collapse">
+                    <video width="250" height="170" controls style="margin:5px 0px 0px 25%">
+                      <source src="assets/videos/{{item.video}}" type="video/mp4">
+                    </video>
+                    <div>
+                      <img src="assets/imagenes/{{item.imagen}}" width="150" height="150" style="margin:5px 0px 0px 40%">
+                    </div>
+
+                  </div>
+                </ng-template>
+                <button (click)="DeleteRespuesta(item.respuestaid)" class="btn btn-danger pull-right glyphicon glyphicon-remove-circle"
+                    style="margin:5px 0px 0px 83%"> ELIMINAR</button>
               </div>
               <!-- <div >
                
@@ -130,7 +147,7 @@
           </div>
           <div class="modal-body">
               <input type="file" (change)="elegirVideo($event)">
-              <h1>video selecciond {{addvideo}}</h1>
+              <h1>video seleccionado: {{addvideo}}</h1>
               <video width="100%" height="100%" loop controls style="background-color: #000 !important;">
                 <source src="../../assets/videos/{{addvideo}}" type="video/mp4">
                 Your browser does not support the video tag.

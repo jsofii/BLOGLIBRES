@@ -73,7 +73,7 @@
               </td>
               <td *ngIf="item.estado">
                 <button (click)="CerrarTema(item.preguntaid)" class="btn btn-info">Cerrar tema</button>
-                <button  class="btn btn-danger">Eliminar</button>
+                <button  (click)="EliminarTema(item.preguntaid)" class="btn btn-danger">Eliminar</button>
                 <button [routerLink]='["/gestion-respuesta/", item.preguntaid, idusuario, nombre, rol]' class="btn btn-active glyphicon glyphicon-circle-arrow-right"></button>
               </td>
               <td *ngIf="!item.estado">

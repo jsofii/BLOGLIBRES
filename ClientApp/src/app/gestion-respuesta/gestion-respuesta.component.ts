@@ -16,8 +16,10 @@ export class GestionRespuestaComponent implements OnInit {
   imagenrespuesta:string="sinImagen";
   imagenrespuesta2:string="sinImagen";
   videorespuesta:string="sinVideo";
-  addimagen:string="sinImagen";
-  addvideo:string="sinVideo";
+
+  addimagen: string = null;
+  addvideo: string = null;
+
   idusuario:number=0;
   nombre:string;
   rol:string;
@@ -33,14 +35,22 @@ export class GestionRespuestaComponent implements OnInit {
     this.CargarRespuestas();
     this.CargarPregunta();
   }
-  elegirImagen(event){
+  elegirImagen(event) {
     const file = event.target.files[0];
-    this.addimagen=file.name;
-    console.log(this.addimagen);
+
+    this.addimagen = file.name;
+
+
+
   }
-  elegirVideo(event){
-    const file= event.target.files[0];
-    this.addvideo=file.name;
+
+
+  elegirVideo(event) {
+    const file = event.target.files[0];
+
+    this.addvideo = file.name;
+
+
 
   }
   SeleccionarImagen(imagen:string){
@@ -48,14 +58,16 @@ export class GestionRespuestaComponent implements OnInit {
   }
  
   //Función que carga las Respuestas de una pregunta
-  listaRespuestas:any;
-  CargarRespuestas(){
+  listaRespuestas: any;
+  totalrespuestas: number = 0;
+  CargarRespuestas() {
     this.gestionService.CargarRespuestas(this.idPregunta).subscribe(
-      data=>{
-        this.listaRespuestas=data;
+      data => {
+        this.listaRespuestas = data;
+        this.totalrespuestas = this.listaRespuestas.length;
       }
     )
-    
+
   }
   preguntaNombre:any;
   pregunta:any;
@@ -72,7 +84,9 @@ export class GestionRespuestaComponent implements OnInit {
       data=>{
         this.CargarRespuestas();
        
-        this.contenido="";
+        this.contenido = "";
+        this.addimagen = null;
+        this.addvideo = null;
       }
       
     );
