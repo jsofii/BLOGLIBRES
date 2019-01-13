@@ -69,15 +69,25 @@ namespace _1.Libres.Controllers
         [Route("IngresarRespuesta")]
         public List<Respuesta> Respuesta([FromBody] Respuesta respuesta)
         {
-            Respuesta res = new Respuesta
+
+            //ss
+            string imagen=null;
+            string video=null;
+            if(respuesta.Imagen!="no"){
+                imagen=respuesta.Imagen;
+            }
+            if(respuesta.Video!="no"){
+                video=respuesta.Video;
+            }
+             Respuesta res = new Respuesta
             {
                 Contenido = respuesta.Contenido,
                 Preguntaid = respuesta.Preguntaid,
                 Titulo= respuesta.Titulo,
                 Usuarioid=respuesta.Usuarioid,
                 Fecha=DateTime.Now,
-                Video=respuesta.Video,
-                Imagen=respuesta.Imagen
+                Video=video,
+                Imagen=imagen
                
             };
             this.context.Respuesta.Add(res);

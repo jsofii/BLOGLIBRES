@@ -17,8 +17,8 @@ export class GestionRespuestaComponent implements OnInit {
   imagenrespuesta2:string="sinImagen";
   videorespuesta:string="sinVideo";
 
-  addimagen: string = null;
-  addvideo: string = null;
+  addimagen: string = "no";
+  addvideo: string = "no";
 
   idusuario:number=0;
   nombre:string;
