@@ -28,7 +28,7 @@ if ($_SESSION['usuario']=='admin') {
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetos de aprendizaje
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -43,7 +43,7 @@ if ($_SESSION['usuario']=='admin') {
                 ?>
                 <li><a href="adm_herramientas.php">Herramientas</a></li>
                 <li ><a href="adm_encuesta.php">Resultados evaluación</a></li>
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="adm_colaboradores/nuevo.php">Nuevo</a></li>
