@@ -9,7 +9,7 @@ $id_usuario;
 echo $_FILES["perfil"]["name"]."<br>";
 if (move_uploaded_file($_FILES["perfil"]["tmp_name"],$target_file)) {
     $seGuardo_sto = 1;
-    // echo "<script>location.href='nuevo.php'</script>";
+    echo "<script>location.href='nuevo.php'</script>";
     // $lis = obtener_lista_de_usuarios();
     // echo '<br>'.$lis;
     // $listaUsiarios = explode(",",$lis);

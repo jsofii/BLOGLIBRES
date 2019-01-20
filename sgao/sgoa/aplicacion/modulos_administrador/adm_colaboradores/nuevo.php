@@ -16,6 +16,16 @@ if ($_SESSION['usuario']=='admin') {
     $nombre=$_SESSION['usuario'];
     $rol='profesor';
 }
+require '../../clases_negocio/funciones_oa_profesor.php';
+$lisAux;
+if($_SERVER["QUERY_STRING"]!=""){
+    $lis = obtener_usuario_como_arreglo($_SERVER["QUERY_STRING"]);
+    $cont=0;
+    foreach ($lis as &$tipo) {
+        $lisAux[$cont]=$tipo;
+        $cont++;
+    }
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
@@ -34,7 +44,7 @@ if ($_SESSION['usuario']=='admin') {
 
 <body>
 <?php include './navbar_adm_colaboradores.php';
-require '../../clases_negocio/funciones_oa_profesor.php';
+
 ?>
 
     <center>
@@ -55,11 +65,6 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                                 if($usu!='admin')
                                 echo '<option value="'.$usu.'">'.$usu.'</option>';
                             }
-
-                            // $usuario = obtener_usuario_como_arreglo('Cesar');
-                            // foreach ($lis as &$tipo) {
-                            //     echo $tipo."<br>";
-                            // }
                         ?>
                     </select>
 
@@ -68,28 +73,28 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                     <script>
                         const opcion = document.getElementById("opc");
                         var contOp; 
-                        opcion.addEventListener("click", function(){
-                            // console.log(opcion.value);
-                            contOp = opcion.value;
+                        opcion.addEventListener("change", function(){
+                            // if (key === 13) {
+                                contOp = opcion.value;
+                                var x = "nuevo.php";
+                                location.href=x+"?"+contOp; 
+                            // }
                         });
-                        if(contOp!=""){
-                            var usuarioJS=""; <?php echo obtener_usuario_como_arreglo("Cesar");?>; 
-                        }
-                        console.log(usuarioJS);
+                        
                     </script>
-
+                    
                     <label>Cédula</label>
                     <div class="field">
-                        <input type="text" name="cedula" placeholder="172396..." style="border: 2px solid #ccc;">
+                        <input type="text" name="cedula" placeholder="172396..." style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[1];}?> readonly>
                     </div>
                     <label>Nombre</label>
 
                     <div class="two fields">
                         <div class="field">
-                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;" readonly>
+                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;" id="in-nombre" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[2];}?> readonly>
                         </div>
                         <div class="field">
-                            <input type="text" name="Apellido" placeholder="Apellido" style="border: 2px solid #ccc;" readonly>
+                            <input type="text" name="Apellido" placeholder="Apellido"  style="border: 2px solid #ccc;" id="in-apellido" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[3];}?> readonly> 
                         </div>
                     </div>
                 </div>
@@ -202,7 +207,7 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                 </div>
                 <label>Correo electrónico</label>
                 <div class="field">
-                    <input type="text" name="correoElec" placeholder="nombre.apellido@hotmail.com" style="border: 2px solid #ccc;"> 
+                    <input type="text" name="correoElec" placeholder="nombre.apellido@hotmail.com" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[6];}?> readonly> 
                 </div>
                 
                 
