@@ -33,59 +33,23 @@ if ($_SESSION['usuario']=='admin') {
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Bienvenid@: <strong>
-                        <?php echo $_SESSION['usuario'] ?></strong></a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetos de aprendizaje
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../adm_objetos_aprendizaj
-                        +e.php">Importar y catalogar
-                                    objetos de aprendizaje</a></li>
-                            <li><a href="../adm_buscar.php">Buscar y administrar objetos de aprendizaje</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../adm_buscar_profesores.php">Gestionar profesores</a></li>
-                    <li><a href="../adm_buscar_estudiantes.php">Gestionar Estudiantes</a></li>
-                    <?php
-                echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Blog</a></li>';
-                ?>
-                    <li><a href="../adm_herramientas.php">Herramientas</a></li>
-                    <li><a href="../adm_encuesta.php">Resultados evaluación</a></li>
-                    <li class="dropdown active">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="nuevo.php">Nuevo</a></li>
-                            <li><a href="edicion.php">Edicion</a></li>
-                            <li><a href="borrar.php">Borrar</a></li>
-                            <li><a href="contribuciones.php">Contribuciones</a></li>
-                            <li><a href="../adm_objetos_aprendizaje.php">Salir</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../../aplicacion/desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span>
-                            Salir</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<?php include './navbar_adm_colaboradores.php';?>
+   
     <center>
         <div class="ui segment" style="width:60%;">
-            <form class="ui  form">
+            <form class="ui  form" action="registrarInformacion.php" method="POST" enctype="multipart/form-data">
                 <h4 class="ui  dividing header">Nuevo colaborador</h4>
                 <div class="field">
+                    <label>Usuario</label>
+                    <div class="field">
+                    <select class="ui dropdown" style="border: 2px solid #ccc;">
+                        <option value=''>--Seleccione un usuario--</option>
+                        <?php
+                            
+                        ?>
+                    </select>
+                    </div>
+
                     <label>Cédula</label>
                     <div class="field">
                         <input type="text" name="cedula" placeholder="172396..." style="border: 2px solid #ccc;">
@@ -212,8 +176,15 @@ if ($_SESSION['usuario']=='admin') {
                 <div class="field">
                     <input type="text" name="correoElec" placeholder="nombre.apellido@hotmail.com" style="border: 2px solid #ccc;"> 
                 </div>
-        </div>
-        <div class="ui button" tabindex="0">Crear</div>
+                
+                
+                <label>Foto</label>
+                <div class="field">
+                    <input type="file" id="imagen" name="perfil" required>
+                </div>
+    
+            </div>
+            <button class="ui button" type="submit">Submit</button>
         </form>
         </div>
     </center>
