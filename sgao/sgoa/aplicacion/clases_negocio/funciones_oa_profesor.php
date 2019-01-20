@@ -204,6 +204,46 @@ function obtener_lista_de_usuarios() {
     return implode(',', $arreglo);
 }
 
+function obtener_usuario_como_arreglo($id_usuario) {
+    $conexion = new Conexion();
+    $statement = 'select idUsuario, tipo_usuario from usuario where usuario=?';
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute([$id_usuario]);
+   
+    if ($consulta->rowCount() != 0) {
+        $tipos = $consulta->fetch();
+    }
+    $vals;
+    $cont=0;
+    foreach ($tipos as &$tipo) {
+        if($cont==0)
+            $vals=$tipo;
+        $cont++;
+    }
+    if($tipo=='PRO'){
+        $statement = 'select * from profesor where id_usuario=?';
+        $consulta = $conexion->prepare($statement);
+        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+        $consulta->execute([$vals]);
+    }else{
+        $statement = 'select * from estudiante where id_usuario=?';
+        $consulta = $conexion->prepare($statement);
+        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+        $consulta->execute([$vals]);
+    }
+    
+    if ($consulta->rowCount() != 0) {
+        $fila = $consulta->fetch();
+    }
+
+    if (isset($fila)) {
+        return $fila;
+    } else {
+        return null;
+    }
+}
+
 function insertar_usuario($usuario, $contrasenia, $tipo_usuario, $esta_activo) {
     $conexion = new Conexion();
     $statement = 'INSERT INTO usuario (usuario,contrasenia,tipo_usuario, activo) VALUES (?,?,?, ?)';
@@ -272,7 +312,6 @@ function generar_usuario_profesor($nombre, $apellido){
         return $usuario;
     } else {
         return null;
-
     }
 }
 

@@ -33,8 +33,10 @@ if ($_SESSION['usuario']=='admin') {
 </head>
 
 <body>
-<?php include './navbar_adm_colaboradores.php';?>
-   
+<?php include './navbar_adm_colaboradores.php';
+require '../../clases_negocio/funciones_oa_profesor.php';
+?>
+
     <center>
         <div class="ui segment" style="width:60%;">
             <form class="ui  form" action="registrarInformacion.php" method="POST" enctype="multipart/form-data">
@@ -42,13 +44,39 @@ if ($_SESSION['usuario']=='admin') {
                 <div class="field">
                     <label>Usuario</label>
                     <div class="field">
-                    <select class="ui dropdown" style="border: 2px solid #ccc;">
+
+                    <select class="ui dropdown" style="border: 2px solid #ccc;" id="opc">
                         <option value=''>--Seleccione un usuario--</option>
                         <?php
-                            
+                            $cont=0;
+                            $lis = obtener_lista_de_usuarios();
+                            $listaUsiarios = explode(",",$lis);
+                            foreach ($listaUsiarios as &$usu) {
+                                if($usu!='admin')
+                                echo '<option value="'.$usu.'">'.$usu.'</option>';
+                            }
+
+                            // $usuario = obtener_usuario_como_arreglo('Cesar');
+                            // foreach ($lis as &$tipo) {
+                            //     echo $tipo."<br>";
+                            // }
                         ?>
                     </select>
+
                     </div>
+                    
+                    <script>
+                        const opcion = document.getElementById("opc");
+                        var contOp; 
+                        opcion.addEventListener("click", function(){
+                            // console.log(opcion.value);
+                            contOp = opcion.value;
+                        });
+                        if(contOp!=""){
+                            var usuarioJS=""; <?php echo obtener_usuario_como_arreglo("Cesar");?>; 
+                        }
+                        console.log(usuarioJS);
+                    </script>
 
                     <label>Cédula</label>
                     <div class="field">
@@ -58,10 +86,10 @@ if ($_SESSION['usuario']=='admin') {
 
                     <div class="two fields">
                         <div class="field">
-                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;">
+                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;" readonly>
                         </div>
                         <div class="field">
-                            <input type="text" name="Apellido" placeholder="Apellido" style="border: 2px solid #ccc;">
+                            <input type="text" name="Apellido" placeholder="Apellido" style="border: 2px solid #ccc;" readonly>
                         </div>
                     </div>
                 </div>
