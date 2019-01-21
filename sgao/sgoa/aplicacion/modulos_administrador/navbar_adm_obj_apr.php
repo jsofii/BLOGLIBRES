@@ -39,7 +39,7 @@ if ($_SESSION['usuario']=='admin') {
                 <li><a href="adm_buscar_profesores.php">Gestionar profesores</a></li>
                 <li><a href="adm_buscar_estudiantes.php">Gestionar Estudiantes</a></li>
                 <?php
-                echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Blog</a></li>';
+                echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Foro</a></li>';
                 ?>
                 <li><a href="adm_herramientas.php">Herramientas</a></li>
                 <li ><a href="adm_encuesta.php">Resultados evaluación</a></li>
