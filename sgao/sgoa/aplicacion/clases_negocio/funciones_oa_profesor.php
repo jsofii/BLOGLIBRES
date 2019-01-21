@@ -453,4 +453,59 @@ function ingresar_colaborador($idDireccion, $idTelefono, $DireccionImagen,$fecha
         return false;
     }
 }
+
+function actualizar_Direccion($id,$calle,$nro,$transversal,$sector,$ciudad) {
+    $statement_del = 'UPDATE direccion set Calle="' . $calle . '", Nro="' . $nro . '", Transversal="' . $transversal . '",Sector="' . $sector . '", Ciudad="' . $ciudad . '" where idDireccion=' . $id;
+    $conexion_del = new Conexion();
+    $consulta_del = $conexion_del->prepare($statement_del);
+    $consulta_del->execute();
+}
+
+function actualizar_telefono($id,$celular,$convencional) {
+    $statement_del = 'UPDATE telefono set Convencional="' . $convencional . '", Celular="' . $celular . '" where idTelefono=' . $id;
+    $conexion_del = new Conexion();
+    $consulta_del = $conexion_del->prepare($statement_del);
+    $consulta_del->execute();
+}
+
+function actualizar_soloColaborador($id,$fechaDeNacimiento,$genero) {
+    $statement_del = 'UPDATE colaborador set FechaDeNacimiento="' . $fechaDeNacimiento . '", Género="' . $genero . '" where idColaborador=' . $id;
+    $conexion_del = new Conexion();
+    $consulta_del = $conexion_del->prepare($statement_del);
+    $consulta_del->execute();
+}
+
+function obtenerColaborador($id){
+    $conexion = new Conexion();
+    $statement = 'SELECT * FROM colaborador where idColaborador='.$id;
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute();
+    $colaborador;
+    if ($consulta->rowCount() != 0) {
+        $colaborador = $consulta->fetch();
+    }
+    if (isset($colaborador)) {
+        return $colaborador;
+    } else {
+        return null;
+    }
+}
+
+function obtenerColaboradorPorUsuario($id){
+    $conexion = new Conexion();
+    $statement = 'SELECT * FROM colaborador where idUsuario='.$id;
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute();
+    $colaborador;
+    if ($consulta->rowCount() != 0) {
+        $colaborador = $consulta->fetch();
+    }
+    if (isset($colaborador)) {
+        return $colaborador;
+    } else {
+        return null;
+    }
+}
 ?>

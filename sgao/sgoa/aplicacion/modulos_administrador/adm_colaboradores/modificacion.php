@@ -22,6 +22,10 @@ if($_SERVER["QUERY_STRING"]!=""){
     $id = recuperar_id_usuario_por_nombre($_SERVER["QUERY_STRING"]);
     $tipo = obtener_tipo_usuario_con_id($id);
     $conexion = new Conexion();
+    $colaborador = obtenerColaboradorPorUsuario ($id);
+    echo ' <p id="Fecha" hidden>'.$colaborador['FechaDeNacimiento'].'</p>';
+    echo ' <p id="Genero" hidden>'.$colaborador['Género'].'</p>';
+    // echo ' <p id="Genero" hidden>'.$colaborador['Género'].'</p>';
     if($tipo=='EST'){
         $statement = 'SELECT * FROM usuario as u,colaborador as c,estudiante as e, telefono as t,Direccion d 
         where c.idUsuario = u.idUsuario and e.id_Usuario=u.idUsuario and c.idtelefono=t.idtelefono and c.idDireccion=d.idDireccion and u.idUsuario="'.$id.'"';
@@ -54,20 +58,20 @@ if($_SERVER["QUERY_STRING"]!=""){
     <link rel="stylesheet" href="../../../estilos/semantic.css">
     <title>Colaboradores</title>
 </head>
-
 <body>
 <?php include './navbar_adm_colaboradores.php';
-
 ?>
-
     <center>
         <div class="ui segment" style="width:60%;">
-            <form class="ui  form" action="registrarInformacion.php" method="POST" enctype="multipart/form-data">
+            <form class="ui  form" action="actualizarColaborador.php" method="POST" enctype="multipart/form-data">
                 <h4 class="ui  dividing header">Actualización de colaborador</h4>
                 <div class="field">
+                <?php
+                         echo '<input type="hidden" name="idColaborador" value='.$colaborador['idColaborador'].'>'
+                ?>
                     <label>Cédula</label>
                     <div class="field">
-                        <input type="text" name="cedula" placeholder="172396..." style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['ci'];}?> readonly>
+                    <input type="text" name="cedula" placeholder="172396..." style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['ci'];}?> readonly>
                     </div>
                     <label>Nombre</label>
 
@@ -78,23 +82,24 @@ if($_SERVER["QUERY_STRING"]!=""){
                         <div class="field">
                             <input type="text" name="Apellido" placeholder="Apellido"  style="border: 2px solid #ccc;" id="in-apellido" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['apellidos'];}?> readonly> 
                         </div>
+                        
                     </div>
                 </div>
                 <label>Fecha de nacimiento</label>
                 <div class="three fields">
                     <div class="field">
                         <label>Día</label>
-                        <select class="ui dropdown" style="border: 2px solid #ccc;" name='dia'>
+                        <select class="ui dropdown" style="border: 2px solid #ccc;" name='dia' id='InDia'>
                             <option value=''>--Seleccione un día--</option>
-                            <option selected value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                            <option value='5'>5</option>
-                            <option value='6'>6</option>
-                            <option value='7'>7</option>
-                            <option value='8'>8</option>
-                            <option value='9'>9</option>
+                            <option value='01'>1</option>
+                            <option value='02'>2</option>
+                            <option value='03'>3</option>
+                            <option value='04'>4</option>
+                            <option value='05'>5</option>
+                            <option value='06'>6</option>
+                            <option value='07'>7</option>
+                            <option value='08'>8</option>
+                            <option value='09'>9</option>
                             <option value='10'>10</option>
                             <option value='11'>11</option>
                             <option value='12'>12</option>
@@ -121,17 +126,17 @@ if($_SERVER["QUERY_STRING"]!=""){
                     </div>
                     <div class="field">
                         <label>Mes</label>
-                        <select class="ui dropdown" style="border: 2px solid #ccc;" name="mes">
+                        <select class="ui dropdown" style="border: 2px solid #ccc;" name="mes" id='InMes'>
                             <option value=''>--Seleccione un mes--</option>
-                            <option selected value='1'>Enero</option>
-                            <option value='2'>Febrero</option>
-                            <option value='3'>Marzo</option>
-                            <option value='4'>Abril</option>
-                            <option value='5'>Mayo</option>
-                            <option value='6'>Junio</option>
-                            <option value='7'>Julio</option>
-                            <option value='8'>Agosto</option>
-                            <option value='9'>Septiembre</option>
+                            <option value='01'>Enero</option>
+                            <option value='02'>Febrero</option>
+                            <option value='03'>Marzo</option>
+                            <option value='04'>Abril</option>
+                            <option value='05'>Mayo</option>
+                            <option value='06'>Junio</option>
+                            <option value='07'>Julio</option>
+                            <option value='08'>Agosto</option>
+                            <option value='09'>Septiembre</option>
                             <option value='10'>Octubre</option>
                             <option value='11'>Noviembre</option>
                             <option value='12'>Diciembre</option>
@@ -139,16 +144,17 @@ if($_SERVER["QUERY_STRING"]!=""){
                     </div>
                     <div class="field">
                         <label>Año</label>
-                        <input type="text" name="anio" placeholder="Año" style="border: 2px solid #ccc;">
+                        <input type="text" name="anio" placeholder="Año" style="border: 2px solid #ccc;" id='InAño'>
                     </div>
                 </div>
+                
                 <label>Género</label>
                 <div class="two fields">
                     <div class="field">
-                        <label>Mujer</label><input type="radio" name="example2" checked="checked">
+                        <label>Mujer</label><input type="radio" name="example2" value="F" checked="checked">
                     </div>
                     <div class="field">
-                        <label>Hombre</label><input type="radio" name="example2">
+                        <label>Hombre</label><input type="radio" name="example2" value="M" id="myCheck">
                     </div>
                 </div>
                 <label>Dirección de domicilio</label>
@@ -189,17 +195,18 @@ if($_SERVER["QUERY_STRING"]!=""){
                 </div>
                 <label>Correo electrónico</label>
                 <div class="field">
-                    <input type="text" name="correoElec" placeholder="nombre.apellido@hotmail.com" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['mail'];}?>> 
+                    <input type="text" name="correoElec" placeholder="nombre.apellido@hotmail.com" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['mail'];}?> readonly> 
                 </div>
-                
-                
-                <!-- <label>Foto</label>
-                <div class="field">
-                    <input type="file" id="imagen" name="perfil" required>
-                </div> -->
-    
+                <script>
+                    fecha = document.getElementById("Fecha").innerHTML;
+                    var fe = fecha.split("-");
+                    document.getElementById("InDia").value = fe[2];
+                    document.getElementById("InMes").value = fe[1];
+                    document.getElementById("InAño").value = fe[0];
+                    if(document.getElementById("Genero").innerHTML == "M")document.getElementById("myCheck").checked = true;
+                </script>
             </div>
-            <button class="ui button" type="submit">Submit</button>
+            <button class="ui button" type="submit">Actualizar</button>
         </form>
         </div>
     </center>

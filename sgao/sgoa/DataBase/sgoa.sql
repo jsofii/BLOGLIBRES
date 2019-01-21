@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-01-2019 a las 02:52:28
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.2.12
+-- Tiempo de generación: 21-01-2019 a las 18:24:28
+-- Versión del servidor: 10.1.33-MariaDB
+-- Versión de PHP: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -51,6 +51,22 @@ INSERT INTO `catalogooa` (`idCatalogoOA`, `materia`, `cantidad`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `colaborador`
+--
+
+CREATE TABLE `colaborador` (
+  `idColaborador` int(11) NOT NULL,
+  `idDireccion` int(11) NOT NULL,
+  `idTelefono` int(11) NOT NULL,
+  `DireccionImagen` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `FechaDeNacimiento` date NOT NULL,
+  `Género` varchar(6) NOT NULL,
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `comentario`
 --
 
@@ -62,13 +78,6 @@ CREATE TABLE `comentario` (
   `fechacomentario` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rutaimagen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `comentario`
---
-
-INSERT INTO `comentario` (`idcomentario`, `contenido`, `idusuario`, `id_objeto_aprendizaje`, `fechacomentario`, `rutaimagen`) VALUES
-(1, 'Este recurso no tiene bibliografía, por favor incluirla', 9, 16, '2018-07-26 22:01:31', '../../imagenes/');
 
 -- --------------------------------------------------------
 
@@ -107,6 +116,21 @@ INSERT INTO `departamento` (`iddepartamento`, `departamento`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `direccion`
+--
+
+CREATE TABLE `direccion` (
+  `idDireccion` int(11) NOT NULL,
+  `Calle` varchar(32) NOT NULL,
+  `Nro` varchar(8) NOT NULL,
+  `Transversal` varchar(32) NOT NULL,
+  `Sector` varchar(32) NOT NULL,
+  `Ciudad` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estudiante`
 --
 
@@ -126,7 +150,7 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`idestudiante`, `ci`, `nombres`, `apellidos`, `carrera`, `id_facultad`, `mail`, `id_usuario`) VALUES
-(1, '1714296603', 'Karina', 'Tapia', 'Sistemas', 8, 'alexisalex31@hotmail.com', 2);
+(1, '1723964308', 'Diego Andres ', 'Portero Lopez', 'FIS', 8, 'diego@epn.com', 4);
 
 -- --------------------------------------------------------
 
@@ -288,8 +312,7 @@ CREATE TABLE `objeto_aprendizaje` (
 --
 
 INSERT INTO `objeto_aprendizaje` (`idobjeto_aprendizaje`, `nombre`, `descripcion`, `id_usuario`, `institucion`, `fechaCreacion`, `palabras_clave`, `tamanio`, `ruta`, `materia`, `descarga`) VALUES
-(12, 'ecotec', 'ecol', 4, 'EPN', '2018-07-24 22:17:50', 'eco', '123391', '../../storage/ecotec.zip', 'GEOQUIMICA', 2),
-(16, 'Metodos', 'Agiles', 4, 'EPN', '2018-07-26 21:49:01', 'metodos agiles', '116845', '../../storage/Metodos.zip', 'INGENIERÍA DE SOFTWARE II', 1);
+(17, 'Metodos', 'Metodos', 1, 'EPN', '2019-01-13 01:43:29', 'metodos', '116845', '../../storage/Metodos.zip', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -313,9 +336,19 @@ CREATE TABLE `profesor` (
 --
 
 INSERT INTO `profesor` (`idprofesor`, `ci`, `nombres`, `apellidos`, `id_departamento`, `id_facultad`, `mail`, `id_usuario`) VALUES
-(1, '1725790032', 'Alexis', 'Maldonado', 11, 2, 'alexis.maldonado@epn.edu.ec', 4),
-(2, '1725790032', 'Fernando', 'Tapia', 7, 6, 'alexisalex31@hotmail.com', 5),
-(3, '0802548578', 'Maria', 'Intriago', 17, 8, 'monserrate.intriago@epn.edu.ec', 9);
+(1, '1723964308', 'Cesar Andres', 'Balcazar', 17, 8, 'cesar@epn.com', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `telefono`
+--
+
+CREATE TABLE `telefono` (
+  `idTelefono` int(11) NOT NULL,
+  `Convencional` varchar(13) NOT NULL,
+  `Celular` varchar(13) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -337,13 +370,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `usuario`, `contrasenia`, `tipo_usuario`, `activo`) VALUES
 (1, 'admin', 'admin', 'ADM', 'V'),
-(2, 'ktapia', 'hola123', 'EST', 'V'),
-(4, 'AlexisMaldonado0', 'alexis', 'PRO', 'V'),
-(5, 'FernandoTapia0', 'bESn9', 'PRO', 'F'),
-(6, 'mmjaramilloarteaga', 'mmjaramilloarteaga', 'EST', 'V'),
-(7, 'mmjaramillo', 'mmjaramillo', 'EST', 'V'),
-(8, 'mmjaramillo', '123', 'EST', 'V'),
-(9, 'MariaIntriago0', 'gcjFI', 'PRO', 'V');
+(3, 'Cesar', 'password', 'PRO', 'V'),
+(4, 'Diego', 'password', 'EST', 'V');
 
 -- --------------------------------------------------------
 
@@ -381,6 +409,15 @@ ALTER TABLE `catalogooa`
   ADD PRIMARY KEY (`idCatalogoOA`);
 
 --
+-- Indices de la tabla `colaborador`
+--
+ALTER TABLE `colaborador`
+  ADD PRIMARY KEY (`idColaborador`),
+  ADD KEY `idDireccion` (`idDireccion`),
+  ADD KEY `idTelefono` (`idTelefono`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
 -- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
@@ -393,6 +430,12 @@ ALTER TABLE `comentario`
 --
 ALTER TABLE `departamento`
   ADD PRIMARY KEY (`iddepartamento`);
+
+--
+-- Indices de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD PRIMARY KEY (`idDireccion`);
 
 --
 -- Indices de la tabla `estudiante`
@@ -432,6 +475,12 @@ ALTER TABLE `profesor`
   ADD KEY `fk_profesor_facultad1_idx` (`id_facultad`);
 
 --
+-- Indices de la tabla `telefono`
+--
+ALTER TABLE `telefono`
+  ADD PRIMARY KEY (`idTelefono`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -454,16 +503,28 @@ ALTER TABLE `catalogooa`
   MODIFY `idCatalogoOA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `colaborador`
+--
+ALTER TABLE `colaborador`
+  MODIFY `idColaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `idcomentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcomentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   MODIFY `iddepartamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  MODIFY `idDireccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
@@ -487,19 +548,25 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `objeto_aprendizaje`
 --
 ALTER TABLE `objeto_aprendizaje`
-  MODIFY `idobjeto_aprendizaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idobjeto_aprendizaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `idprofesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idprofesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `telefono`
+--
+ALTER TABLE `telefono`
+  MODIFY `idTelefono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `valoracion`
@@ -510,6 +577,14 @@ ALTER TABLE `valoracion`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `colaborador`
+--
+ALTER TABLE `colaborador`
+  ADD CONSTRAINT `colaborador_ibfk_1` FOREIGN KEY (`idDireccion`) REFERENCES `direccion` (`idDireccion`),
+  ADD CONSTRAINT `colaborador_ibfk_2` FOREIGN KEY (`idTelefono`) REFERENCES `telefono` (`idTelefono`),
+  ADD CONSTRAINT `colaborador_ibfk_3` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 
 --
 -- Filtros para la tabla `comentario`

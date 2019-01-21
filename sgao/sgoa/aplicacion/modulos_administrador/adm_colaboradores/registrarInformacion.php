@@ -23,11 +23,7 @@ $Mes = filter_input(INPUT_POST, 'mes');
 $Año = filter_input(INPUT_POST, 'anio');
 $fechaDeNacimiento = $Año.'-'.$Mes.'-'.$Dia;
 $Genero = filter_input(INPUT_POST, 'example2');
-if($Genero=='on'){
-    $Genero='F';
-}else{
-    $Genero='M';
-}
+
 
 if (move_uploaded_file($_FILES["perfil"]["tmp_name"],$target_file)) {
     $seGuardo_sto = 1;
@@ -38,7 +34,7 @@ if (move_uploaded_file($_FILES["perfil"]["tmp_name"],$target_file)) {
     $idUsu=recuperar_id_usuario_por_nombre($nombre);
     ingresar_colaborador($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento,$Genero,$idUsu);
     echo "<script>location.href='nuevo.php'</script>";
-    echo $NumMes."<br>".$Mes;
+    // echo $NumMes."<br>".$Mes;
 } else {
     $seGuardo_sto = 0;
 }
