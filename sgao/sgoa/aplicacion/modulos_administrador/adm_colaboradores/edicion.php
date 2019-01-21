@@ -16,7 +16,6 @@ if ($_SESSION['usuario']=='admin') {
     $nombre=$_SESSION['usuario'];
     $rol='profesor';
 }
-require '../../clases_negocio/funciones_oa_profesor.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
@@ -35,33 +34,37 @@ require '../../clases_negocio/funciones_oa_profesor.php';
 
 <body>
   <?php include './navbar_adm_colaboradores.php';?>
+  <center>
+        <div class="ui segment" style="width:90%;">
+        <table class="ui celled table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Teléfono</th>
+      <th>Dirección</th>
+      <th>Fecha de nacimiento</th>
+      <th>Género</th>
+    </tr></thead>
+  <tbody>
+    <?php
+    require '../../clases_negocio/funciones_oa_profesor.php';
+    $statement = ("select u.*,p.nombres, p.apellidos, p.ci, p.mail from usuario as u, profesor as p where u.idUsuario=p.id_usuario order by activo");
+    
+    ?>
+    <tr>
+      <td data-label="Name">James<br>h</td>
+      <td data-label="Age">24</td>
+      <td data-label="Job">Engineer</td>
+      <td data-label="J">Engineer</td>
+      <td data-label="Jo">Engineer</td>
+    </tr>
 
-  <table class="ui celled table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Job</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-label="Name">James</td>
-        <td data-label="Age">24</td>
-        <td data-label="Job">Engineer</td>
-      </tr>
-      <tr>
-        <td data-label="Name">Jill</td>
-        <td data-label="Age">26</td>
-        <td data-label="Job">Engineer</td>
-      </tr>
-      <tr>
-        <td data-label="Name">Elyse</td>
-        <td data-label="Age">24</td>
-        <td data-label="Job">Designer</td>
-      </tr>
-    </tbody>
-  </table>
+  </tbody>
+</table>
+        </div>
+  </center>
+
+  
 </body>
 
 </html>
