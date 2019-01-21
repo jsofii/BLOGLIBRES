@@ -386,4 +386,71 @@ function enviar_mail3($to_mail, $usuario, $contrasenia)
         echo "ERROR";
     }
 }
+
+function ingresar_telefono($convencional, $celular){
+    $conexion = new Conexion();
+    $statement = 'INSERT INTO telefono (Convencional, Celular) VALUES (?,?)';
+    $consulta = $conexion->prepare($statement);
+    if ($consulta->execute(array($convencional, $celular))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getIDTelefono($Convencional,$Celular){
+    $conexion = new Conexion();
+    $statement = 'select idTelefono from telefono where Convencional = "'.$Convencional.'" and Celular = "'.$Celular.'"';
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute(); 
+    if ($consulta->rowCount() != 0) {
+        $fila = $consulta->fetch();
+        $idTelefono = $fila['idTelefono'];
+    }
+    if (isset($idTelefono)) {
+        return $idTelefono;
+    } else {
+        return null;
+    }   
+}
+
+function ingresar_direccion($calle,$nro,$transversal,$sector,$ciudad){
+    $conexion = new Conexion();
+    $statement = 'INSERT INTO direccion (Calle,Nro,Transversal,Sector,Ciudad) VALUES (?,?,?,?,?)';
+    $consulta = $conexion->prepare($statement);
+    if ($consulta->execute(array($calle,$nro,$transversal,$sector,$ciudad))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getIDDireccion($Calle,$Nro,$Transversal,$Sector,$Ciudad){
+    $conexion = new Conexion();
+    $statement = 'select idDireccion from Direccion where Calle = "'.$Calle.'" and Nro = "'.$Nro.'" and Transversal ="'.$Transversal.'" and Sector = "'.$Sector.'" and Ciudad = "'.$Ciudad.'"';
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute(); 
+    if ($consulta->rowCount() != 0) {
+        $fila = $consulta->fetch();
+        $idDireccion = $fila['idDireccion'];
+    }
+    if (isset($idDireccion)) {
+        return $idDireccion;
+    } else {
+        return null;
+    }   
+}
+
+function ingresar_colaborador($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento){
+    $conexion = new Conexion();
+    $statement = 'INSERT INTO colaborador (idDireccion, idTelefono, DireccionImagen,FechaDeNacimiento) VALUES (?,?,?,?)';
+    $consulta = $conexion->prepare($statement);
+    if ($consulta->execute(array($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento))) {
+        return true;
+    } else {
+        return false;
+    }
+}
 ?>

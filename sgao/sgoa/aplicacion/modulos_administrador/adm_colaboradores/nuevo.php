@@ -102,7 +102,7 @@ if($_SERVER["QUERY_STRING"]!=""){
                 <div class="three fields">
                     <div class="field">
                         <label>Día</label>
-                        <select class="ui dropdown" style="border: 2px solid #ccc;">
+                        <select class="ui dropdown" style="border: 2px solid #ccc;" name='dia'>
                             <option value=''>--Seleccione un día--</option>
                             <option selected value='1'>1</option>
                             <option value='2'>2</option>
@@ -139,7 +139,7 @@ if($_SERVER["QUERY_STRING"]!=""){
                     </div>
                     <div class="field">
                         <label>Mes</label>
-                        <select class="ui dropdown" style="border: 2px solid #ccc;">
+                        <select class="ui dropdown" style="border: 2px solid #ccc;" name="mes">
                             <option value=''>--Seleccione un mes--</option>
                             <option selected value='1'>Enero</option>
                             <option value='2'>Febrero</option>
@@ -157,7 +157,7 @@ if($_SERVER["QUERY_STRING"]!=""){
                     </div>
                     <div class="field">
                         <label>Año</label>
-                        <input type="text" name="nombre" placeholder="Año" style="border: 2px solid #ccc;">
+                        <input type="text" name="anio" placeholder="Año" style="border: 2px solid #ccc;">
                     </div>
                 </div>
                 <label>Género</label>
@@ -198,11 +198,11 @@ if($_SERVER["QUERY_STRING"]!=""){
                 <div class="two fields">
                     <div class="field">
                         <label>Convencional</label>
-                        <input type="text" name="sector" placeholder="Sector" style="border: 2px solid #ccc;">
+                        <input type="text" name="convencional" placeholder="convencional" style="border: 2px solid #ccc;">
                     </div>
                     <div class="field">
                         <label>Celular</label>
-                        <input type="text" name="ciudad" placeholder="Ciudad" style="border: 2px solid #ccc;">
+                        <input type="text" name="celular" placeholder="celular" style="border: 2px solid #ccc;">
                     </div>
                 </div>
                 <label>Correo electrónico</label>
