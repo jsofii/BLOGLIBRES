@@ -74,13 +74,13 @@ if($_SERVER["QUERY_STRING"]!=""){
                         const opcion = document.getElementById("opc");
                         var contOp; 
                         opcion.addEventListener("change", function(){
-                            // if (key === 13) {
                                 contOp = opcion.value;
                                 var x = "nuevo.php";
                                 location.href=x+"?"+contOp; 
-                            // }
                         });
-                        
+                        // document.getelementbyid('opc').value=window.location.search;
+                        opcion.value=window.location.search.substring(1);
+                        console.log(window.location.search.substring(1));
                     </script>
                     
                     <label>Cédula</label>
