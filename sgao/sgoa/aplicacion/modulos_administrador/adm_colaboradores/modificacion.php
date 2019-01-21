@@ -19,11 +19,24 @@ if ($_SESSION['usuario']=='admin') {
 require '../../clases_negocio/funciones_oa_profesor.php';
 $lisAux;
 if($_SERVER["QUERY_STRING"]!=""){
-    $lis = obtener_usuario_como_arreglo($_SERVER["QUERY_STRING"]);
-    $cont=0;
-    foreach ($lis as &$tipo) {
-        $lisAux[$cont]=$tipo;
-        $cont++;
+    $id = recuperar_id_usuario_por_nombre($_SERVER["QUERY_STRING"]);
+    $tipo = obtener_tipo_usuario_con_id($id);
+    $conexion = new Conexion();
+    if($tipo=='EST'){
+        $statement = 'SELECT * FROM usuario as u,colaborador as c,estudiante as e, telefono as t,Direccion d 
+        where c.idUsuario = u.idUsuario and e.id_Usuario=u.idUsuario and c.idtelefono=t.idtelefono and c.idDireccion=d.idDireccion and u.idUsuario="'.$id.'"';
+        $consulta = $conexion->prepare($statement);
+        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+        $consulta->execute();
+    }else{
+        $statement = 'SELECT * FROM usuario as u,colaborador as c,profesor as p, telefono as t,Direccion d 
+        where c.idUsuario = u.idUsuario and p.id_Usuario=u.idUsuario and c.idtelefono=t.idtelefono and c.idDireccion=d.idDireccion and u.idUsuario="'.$id.'"';
+        $consulta = $conexion->prepare($statement);
+        $consulta->setFetchMode(PDO::FETCH_ASSOC);
+        $consulta->execute();
+    }
+    if ($consulta->rowCount() != 0) {
+        $fila = $consulta->fetch();
     }
 }
 ?>
@@ -50,51 +63,20 @@ if($_SERVER["QUERY_STRING"]!=""){
     <center>
         <div class="ui segment" style="width:60%;">
             <form class="ui  form" action="registrarInformacion.php" method="POST" enctype="multipart/form-data">
-                <h4 class="ui  dividing header">Nuevo colaborador</h4>
+                <h4 class="ui  dividing header">Actualización de colaborador</h4>
                 <div class="field">
-                    <label>Usuario</label>
-                    <div class="field">
-
-                    <select class="ui dropdown" style="border: 2px solid #ccc;" id="opc">
-                        <option value=''>--Seleccione un usuario--</option>
-                        <?php
-                            $cont=0;
-                            $lis = obtener_lista_de_usuarios();
-                            $listaUsiarios = explode(",",$lis);
-                            foreach ($listaUsiarios as &$usu) {
-                                if($usu!='admin')
-                                echo '<option value="'.$usu.'">'.$usu.'</option>';
-                            }
-                        ?>
-                    </select>
-
-                    </div>
-                    
-                    <script>
-                        const opcion = document.getElementById("opc");
-                        var contOp; 
-                        opcion.addEventListener("change", function(){
-                            // if (key === 13) {
-                                contOp = opcion.value;
-                                var x = "nuevo.php";
-                                location.href=x+"?"+contOp; 
-                            // }
-                        });
-                        
-                    </script>
-                    
                     <label>Cédula</label>
                     <div class="field">
-                        <input type="text" name="cedula" placeholder="172396..." style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[1];}?> readonly>
+                        <input type="text" name="cedula" placeholder="172396..." style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['ci'];}?> readonly>
                     </div>
                     <label>Nombre</label>
 
                     <div class="two fields">
                         <div class="field">
-                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;" id="in-nombre" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[2];}?> readonly>
+                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;" id="in-nombre" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['nombres'];}?> readonly>
                         </div>
                         <div class="field">
-                            <input type="text" name="Apellido" placeholder="Apellido"  style="border: 2px solid #ccc;" id="in-apellido" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[3];}?> readonly> 
+                            <input type="text" name="Apellido" placeholder="Apellido"  style="border: 2px solid #ccc;" id="in-apellido" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['apellidos'];}?> readonly> 
                         </div>
                     </div>
                 </div>
@@ -173,48 +155,48 @@ if($_SERVER["QUERY_STRING"]!=""){
                 <div class="three fields">
                     <div class="field">
                         <label>Calle</label>
-                        <input type="text" name="calle" placeholder="Calle" style="border: 2px solid #ccc;">
+                        <input type="text" name="calle" placeholder="Calle" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['Calle'];}?>>
                     </div>
                     <div class="field">
                         <label>Nro</label>
-                        <input type="text" name="Nro" placeholder="E14" style="border: 2px solid #ccc;">
+                        <input type="text" name="Nro" placeholder="E14" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['Nro'];}?>>
                     </div>
                     <div class="field">
                         <label>Transversal</label>
-                        <input type="text" name="transversal" placeholder="transversal" style="border: 2px solid #ccc;">
+                        <input type="text" name="transversal" placeholder="transversal" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['Transversal'];}?>>
                     </div>
                 </div>
                 <div class="two fields">
                     <div class="field">
                         <label>Sector</label>
-                        <input type="text" name="sector" placeholder="Sector" style="border: 2px solid #ccc;">
+                        <input type="text" name="sector" placeholder="Sector" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['Sector'];}?>>
                     </div>
                     <div class="field">
                         <label>Ciudad</label>
-                        <input type="text" name="ciudad" placeholder="Ciudad" style="border: 2px solid #ccc;">
+                        <input type="text" name="ciudad" placeholder="Ciudad" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['Ciudad'];}?>>
                     </div>
                 </div>
                 <label>Número teléfono</label>
                 <div class="two fields">
                     <div class="field">
                         <label>Convencional</label>
-                        <input type="text" name="convencional" placeholder="convencional" style="border: 2px solid #ccc;">
+                        <input type="text" name="convencional" placeholder="convencional" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['Convencional'];}?>>
                     </div>
                     <div class="field">
                         <label>Celular</label>
-                        <input type="text" name="celular" placeholder="celular" style="border: 2px solid #ccc;">
+                        <input type="text" name="celular" placeholder="celular" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['Celular'];}?>>
                     </div>
                 </div>
                 <label>Correo electrónico</label>
                 <div class="field">
-                    <input type="text" name="correoElec" placeholder="nombre.apellido@hotmail.com" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[6];}?> readonly> 
+                    <input type="text" name="correoElec" placeholder="nombre.apellido@hotmail.com" style="border: 2px solid #ccc;" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$fila['mail'];}?>> 
                 </div>
                 
                 
-                <label>Foto</label>
+                <!-- <label>Foto</label>
                 <div class="field">
                     <input type="file" id="imagen" name="perfil" required>
-                </div>
+                </div> -->
     
             </div>
             <button class="ui button" type="submit">Submit</button>

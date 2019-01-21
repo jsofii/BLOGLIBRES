@@ -66,7 +66,7 @@ if ($_SESSION['usuario']=='admin') {
             <td><b>Calle: </b>'.$row['Calle'].'<br><b>Nro: </b>'.$row['Nro'].'<b><br>Transversal: </b>'.$row['Transversal'].'<br><b>Sector: </b>'.$row['Sector'].'<br><b>Ciudad: </b>'.$row['Ciudad'].'</td>
             <td>'.$row['FechaDeNacimiento'].'</td>
             <td>'.$row['Género'].'</td>
-            <td><img src='.$row['DireccionImagen'].' width="80"></td>         
+            <td><a href='.$row['DireccionImagen'].'><img src='.$row['DireccionImagen'].' width="100"></a></td>         
           </tr>';
       }
     }
@@ -86,7 +86,7 @@ if ($_SESSION['usuario']=='admin') {
             <td><b>Calle: </b>'.$row['Calle'].'<br><b>Nro: </b>'.$row['Nro'].'<b><br>Transversal: </b>'.$row['Transversal'].'<br><b>Sector: </b>'.$row['Sector'].'<br><b>Ciudad: </b>'.$row['Ciudad'].'</td>
             <td>'.$row['FechaDeNacimiento'].'</td>
             <td>'.$row['Género'].'</td>
-            <td><img src='.$row['DireccionImagen'].' width="80"></td>
+            <td><a href='.$row['DireccionImagen'].'><img src='.$row['DireccionImagen'].' width="100"></a></td>         
           </tr>';
       }
     }
