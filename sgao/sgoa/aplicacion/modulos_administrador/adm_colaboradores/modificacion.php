@@ -163,10 +163,10 @@ if($_SERVER["QUERY_STRING"]!=""){
                 <label>Género</label>
                 <div class="two fields">
                     <div class="field">
-                        <label>Mujer</label><input type="radio" name="example2" value="on" checked="checked">
+                        <label>Mujer</label><input type="radio" name="example2" checked="checked">
                     </div>
                     <div class="field">
-                        <label>Hombre</label><input type="radio" name="example2" value="of">
+                        <label>Hombre</label><input type="radio" name="example2">
                     </div>
                 </div>
                 <label>Dirección de domicilio</label>

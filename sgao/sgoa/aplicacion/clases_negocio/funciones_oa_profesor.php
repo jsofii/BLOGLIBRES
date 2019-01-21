@@ -443,11 +443,11 @@ function getIDDireccion($Calle,$Nro,$Transversal,$Sector,$Ciudad){
     }   
 }
 
-function ingresar_colaborador($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento){
+function ingresar_colaborador($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento,$idUsuarios,$Genero){
     $conexion = new Conexion();
-    $statement = 'INSERT INTO colaborador (idDireccion, idTelefono, DireccionImagen,FechaDeNacimiento) VALUES (?,?,?,?)';
-    $consulta = $conexion->prepare($statement);
-    if ($consulta->execute(array($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento))) {
+    $statement = 'INSERT INTO colaborador (idDireccion, idTelefono, DireccionImagen,FechaDeNacimiento,Género,idUsuario) VALUES (?,?,?,?,?,?)';
+    $consulta = $conexion->prepare($statement); 
+    if ($consulta->execute(array($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento,$idUsuarios,$Genero))) {
         return true;
     } else {
         return false;

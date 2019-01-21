@@ -40,24 +40,57 @@ if ($_SESSION['usuario']=='admin') {
   <thead>
     <tr>
       <th>Nombre</th>
+      <th>Cédula</th>
       <th>Teléfono</th>
       <th>Dirección</th>
       <th>Fecha de nacimiento</th>
       <th>Género</th>
+      <th></th>
     </tr></thead>
   <tbody>
     <?php
     require '../../clases_negocio/funciones_oa_profesor.php';
-    $statement = ("select u.*,p.nombres, p.apellidos, p.ci, p.mail from usuario as u, profesor as p where u.idUsuario=p.id_usuario order by activo");
-    
+    $statement = 'SELECT * FROM usuario as u,colaborador as c,profesor as p, telefono as t,Direccion d 
+    where c.idUsuario = u.idUsuario and p.id_Usuario=u.idUsuario and c.idtelefono=t.idtelefono and c.idDireccion=d.idDireccion';
+    $conexion = new Conexion();
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute();
+    if ($consulta->rowCount() != 0) {
+      while ($row = $consulta->fetch()) {
+          echo '
+          <tr>
+            <td><a href=modificacion.php?'.$row['nombres'].'>'.$row['nombres'].' '.$row['apellidos'].'</a></td>
+            <td>'.$row['ci'].'</td>
+            <td><b>Celular: </b>'.$row['Celular'].'<br><b>Convencional: </b>'.$row['Convencional'].'</td>
+            <td><b>Calle: </b>'.$row['Calle'].'<br><b>Nro: </b>'.$row['Nro'].'<b><br>Transversal: </b>'.$row['Transversal'].'<br><b>Sector: </b>'.$row['Sector'].'<br><b>Ciudad: </b>'.$row['Ciudad'].'</td>
+            <td>'.$row['FechaDeNacimiento'].'</td>
+            <td>'.$row['Género'].'</td>
+            <td><img src='.$row['DireccionImagen'].' width="80"></td>         
+          </tr>';
+      }
+    }
+    $statement = 'SELECT * FROM usuario as u,colaborador as c,estudiante as e, telefono as t,Direccion d 
+    where c.idUsuario = u.idUsuario and e.id_Usuario=u.idUsuario and c.idtelefono=t.idtelefono and c.idDireccion=d.idDireccion';
+    $conexion = new Conexion();
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute();
+    if ($consulta->rowCount() != 0) {
+      while ($row = $consulta->fetch()) {
+          echo '
+          <tr>
+          <td><a href=modificacion.php?'.$row['nombres'].'>'.$row['nombres'].' '.$row['apellidos'].'</a></td>
+            <td>'.$row['ci'].'</td>
+            <td><b>Celular: </b>'.$row['Celular'].'<br><b>Convencional: </b>'.$row['Convencional'].'</td>
+            <td><b>Calle: </b>'.$row['Calle'].'<br><b>Nro: </b>'.$row['Nro'].'<b><br>Transversal: </b>'.$row['Transversal'].'<br><b>Sector: </b>'.$row['Sector'].'<br><b>Ciudad: </b>'.$row['Ciudad'].'</td>
+            <td>'.$row['FechaDeNacimiento'].'</td>
+            <td>'.$row['Género'].'</td>
+            <td><img src='.$row['DireccionImagen'].' width="80"></td>
+          </tr>';
+      }
+    }
     ?>
-    <tr>
-      <td data-label="Name">James<br>h</td>
-      <td data-label="Age">24</td>
-      <td data-label="Job">Engineer</td>
-      <td data-label="J">Engineer</td>
-      <td data-label="Jo">Engineer</td>
-    </tr>
 
   </tbody>
 </table>
