@@ -105,7 +105,6 @@ require '../clases_negocio/funciones_oa_profesor.php';
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                <li><a href="adm_colaboradores/nuevo.php">Nuevo</a></li>
                                 <li><a href="adm_colaboradores/edicion.php">Edicion</a></li>
                                 <li><a href="adm_colaboradores/borrar.php">Borrar</a></li>
                                 <li><a href="adm_colaboradores/contribuciones.php">Contribuciones</a></li>

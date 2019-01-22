@@ -39,7 +39,6 @@ if ($_SESSION['usuario']=='admin') {
                 <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="nuevo.php">Nuevo</a></li>
                         <li><a href="edicion.php">Edicion</a></li>
                         <li><a href="borrar.php">Borrar</a></li>
                         <li><a href="contribuciones.php">Contribuciones</a></li>

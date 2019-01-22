@@ -17,7 +17,7 @@ if ($_SESSION['usuario']=='admin') {
     $rol='profesor';
 }
 require '../../clases_negocio/funciones_oa_profesor.php';
-// require_once '../../clases_negocio/clase_conexion.php';
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
@@ -44,25 +44,18 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                 <div class="col-md-3">
                 </div>
                 <div class="col-md-3 text-left ">
-                    <select class= "form-control" name="tipo_criterio" dir="ltr" required>
+                    <select class= "form-control" name="tipo_criterio" dir="ltr" id="opcBus" required>
                         <option value="">Filtrar por:</option>
-                        <option value="autor">Autor</option>
                         <option value="nombre">Nombre</option>
-                        <option value="descripcion">Descripción</option>
-                        <option value="institucion">Institución</option>
-                        <option value="palabras_clave">Palabra Clave</option>
-                    </select></br>
+                        <option value="apellido">Apellido</option>
+                    </select><br>
                 </div>
-                <div class="col-md-3 text-center">
-                    <input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar:" name="criterio_busqueda" required></br>
-                </div>
-                <div class="col-md-3 text-left">
-                    <button id="registrar" type="submit" class="btn btn-success">Buscar</button>
-                    </br></br>
+                <div  class="ui input col-md-3 text-center"">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"><br><br>
                 </div>
             </form>
             <div class="container" >
-                <table class="ui celled table" id="tabla">
+                <table class="ui celled table" id="myTable">
                     <thead>
                     <tr class="warning">
                         <td>Nombre</td>
@@ -71,7 +64,8 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                         <td>Fecha Creación</td>
                         <td>Palabras Clave</td>
                         <td>Tamaño</td>
-                        <td>Autor</td>
+                        <td>Nombre</td>
+                        <td>Apellido</td>
                         <td>Comentarios</td>
                         <td>Descargas</td>
                     </tr>
@@ -97,13 +91,13 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                     echo '<td>' . $row['palabras_clave'] . '</td>';
                     echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
                     if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
-                        echo '<td>ADMINISTRADOR</td>';
+                        echo '<td>ADMINISTRADOR</td><td></td>';
                     } else if(obtener_tipo_usuario_con_id($row['id_usuario']) == 'PRO') {
                         $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
-                        echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
+                        echo '<td>' . $profesor['nombres'] . '</td><td>' . $profesor['apellidos'] . '</td>';
                     }else{
                         $profesor = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
-                        echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
+                        echo '<td>' . $profesor['nombres'] . '</td><td>' . $profesor['apellidos'] . '</td>';
                     }
                     echo '<td><a href="adm_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
                     echo '<td>' . $row['descarga'] . '</td>';
@@ -123,56 +117,38 @@ require '../../clases_negocio/funciones_oa_profesor.php';
             }
             $conexion = null;
             ?>
-            <script type = "text/javascript">
-                (function(){
-                    location.reload();
-                }, 10000);
-
-                function myFunction(id_objeto)
-                {
-
-                    $.ajax({
-
-                        url: '../modulos_profesor/pro_ejecutar_actualizar_descarga.php',
-                        type: 'POST',
-                        data: 'objeto_id='+id_objeto,
-                        async : false,
-                    });
-
-                }
-            </script>
-            <script>
-                function hacer_hover($x)
-                {
-                    myPopup = window.open('../modulos_administrador/previsualizar.php?vs='+$x,'popupWindow','width=640,height=480');
-                    myPopup.opener = self;
-                }
-
-                var dataTable = $('#tabla').DataTable({
-                    "processing":true,
-                    "serverSide":true,
-                    "order":[],
-                    "ajax":{
-                        url:"fetch.php",
-                        type:"POST"
-                    },
-                    "columnDefs":[
-                        {
-                            "targets":[0, 3, 4],
-                            "orderable":false,
-                        },
-                    ],
-
-                });
-
-            </script>
-
+        <script>
+        function myFunction() {
+        var bus = document.getElementById("opcBus");
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        columnaNum = 6;
+        if(bus.value=="apellido"){
+            columnaNum = 7;
+        }else{
+            columnaNum = 6;
+        }
+        console.log(columnaNum);
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[columnaNum];
+            if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+            }       
+        }
+        }
+        </script>
         </div>
     </div>
 </div></br></br></br>
-<!-- <footer class="label-default container-fluid text-center">
-    <p class="copyright small">Copyright &copy; Sofia Guerrero, Cesar Balcazar, Diego Portero</p>
-</footer> -->
+
 </body>
 
 </body>

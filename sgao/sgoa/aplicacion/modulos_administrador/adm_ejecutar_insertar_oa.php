@@ -27,7 +27,7 @@ $conexion = new Conexion();
 $statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion, id_usuario, institucion,palabras_clave,tamanio,ruta,descarga) VALUES (?, ?, ?, ?,?,?,?,?)';
 $consulta = $conexion->prepare($statement);
 
-if(obtenerColaboradorPorUsuario($_SESSION['idUsuario'])){
+if(obtenerColaboradorPorUsuario($id_usuario)){
     ingresar_telefono($_SESSION['usuario'],$_SESSION['usuario']);
     $idTelefono=getIDTelefono($_SESSION['usuario'],$_SESSION['usuario']);
     ingresar_direccion($_SESSION['usuario'],$_SESSION['usuario'],$_SESSION['usuario'],$_SESSION['usuario'],$_SESSION['usuario']);

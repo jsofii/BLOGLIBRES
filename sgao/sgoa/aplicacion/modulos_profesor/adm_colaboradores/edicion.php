@@ -60,16 +60,20 @@ if ($_SESSION['usuario']=='admin') {
     $consulta->execute();
     if ($consulta->rowCount() != 0) {
       while ($row = $consulta->fetch()) {
-          echo '
-          <tr>
-            <td><a href=modificacion.php?'.$row['nombres'].'>'.$row['nombres'].' '.$row['apellidos'].'</a></td>
-            <td>'.$row['ci'].'</td>
-            <td><b>Celular: </b>'.$row['Celular'].'<br><b>Convencional: </b>'.$row['Convencional'].'</td>
-            <td><b>Calle: </b>'.$row['Calle'].'<br><b>Nro: </b>'.$row['Nro'].'<b><br>Transversal: </b>'.$row['Transversal'].'<br><b>Sector: </b>'.$row['Sector'].'<br><b>Ciudad: </b>'.$row['Ciudad'].'</td>
-            <td>'.$row['FechaDeNacimiento'].'</td>
-            <td>'.$row['Género'].'</td>
-            <td><a href='.$row['DireccionImagen'].'><img src='.$row['DireccionImagen'].' width="100"></a></td>         
-          </tr>';
+        echo '<tr><td>';
+        if($row['usuario']==$_SESSION['usuario']){
+          echo '<a href=modificacion.php?'.$row['nombres'].'>'.$row['nombres'].' '.$row['apellidos'].'</a></td>';
+        }else{
+          echo '<a>'.$row['nombres'].' '.$row['apellidos'].'</a></td>';
+        }
+        echo '
+          <td>'.$row['ci'].'</td>
+          <td><b>Celular: </b>'.$row['Celular'].'<br><b>Convencional: </b>'.$row['Convencional'].'</td>
+          <td><b>Calle: </b>'.$row['Calle'].'<br><b>Nro: </b>'.$row['Nro'].'<b><br>Transversal: </b>'.$row['Transversal'].'<br><b>Sector: </b>'.$row['Sector'].'<br><b>Ciudad: </b>'.$row['Ciudad'].'</td>
+          <td>'.$row['FechaDeNacimiento'].'</td>
+          <td>'.$row['Género'].'</td>
+          <td><a href='.$row['DireccionImagen'].'><img src='.$row['DireccionImagen'].' width="100"></a></td>         
+        </tr>';
       }
     }
     $statement = 'SELECT * FROM usuario as u,colaborador as c,estudiante as e, telefono as t,Direccion d 
@@ -80,9 +84,13 @@ if ($_SESSION['usuario']=='admin') {
     $consulta->execute();
     if ($consulta->rowCount() != 0) {
       while ($row = $consulta->fetch()) {
+          echo '<tr><td>';
+          if($row['usuario']==$_SESSION['usuario']){
+            echo '<a href=modificacion.php?'.$row['nombres'].'>'.$row['nombres'].' '.$row['apellidos'].'</a></td>';
+          }else{
+            echo '<a>'.$row['nombres'].' '.$row['apellidos'].'</a></td>';
+          }
           echo '
-          <tr>
-          <td><a href=modificacion.php?'.$row['nombres'].'>'.$row['nombres'].' '.$row['apellidos'].'</a></td>
             <td>'.$row['ci'].'</td>
             <td><b>Celular: </b>'.$row['Celular'].'<br><b>Convencional: </b>'.$row['Convencional'].'</td>
             <td><b>Calle: </b>'.$row['Calle'].'<br><b>Nro: </b>'.$row['Nro'].'<b><br>Transversal: </b>'.$row['Transversal'].'<br><b>Sector: </b>'.$row['Sector'].'<br><b>Ciudad: </b>'.$row['Ciudad'].'</td>
