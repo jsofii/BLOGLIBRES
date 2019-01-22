@@ -16,6 +16,7 @@ if ($_SESSION['usuario']=='admin') {
     $nombre=$_SESSION['usuario'];
     $rol='profesor';
 }
+require '../clases_negocio/funciones_oa_profesor.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
@@ -25,6 +26,7 @@ if ($_SESSION['usuario']=='admin') {
         <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
         <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
         <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../../estilos/semantic.css">
         <title>Proyecto SGOA</title>
     </head>
     <style>
@@ -94,9 +96,24 @@ if ($_SESSION['usuario']=='admin') {
                         <li><a href="../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
                         <li class="active"><a href="../modulos_profesor/pro_buscar.php">Buscar</a></li>
                         <?php
-                        echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Blog</a></li>';
+                        echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Foro</a></li>';
                         ?>
                         <li><a href="../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
+                        <?php
+                        if(obtenerColaboradorPorUsuario($_SESSION['id'])!=NULL){
+                            echo '
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                <li><a href="adm_colaboradores/nuevo.php">Nuevo</a></li>
+                                <li><a href="adm_colaboradores/edicion.php">Edicion</a></li>
+                                <li><a href="adm_colaboradores/borrar.php">Borrar</a></li>
+                                <li><a href="adm_colaboradores/contribuciones.php">Contribuciones</a></li>
+                                <li><a href="adm_objetos_aprendizaje.php">Salir</a></li>
+                            </ul>
+                            </li';
+                        }
+                        ?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
@@ -136,8 +153,6 @@ if ($_SESSION['usuario']=='admin') {
                         </form>
 
                     <?php
-                    require_once '../clases_negocio/clase_conexion.php';
-                    require '../clases_negocio/funciones_oa_profesor.php';
                     $statement = ("select * from objeto_aprendizaje");
                     $conexion = new Conexion();
                     $consulta = $conexion->prepare($statement);

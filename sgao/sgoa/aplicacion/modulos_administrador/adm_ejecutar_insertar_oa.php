@@ -26,6 +26,15 @@ $target_file2 = $almacenamiento .urlencode($nombre). '.' . $ext.'.jpg';
 $conexion = new Conexion();
 $statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion, id_usuario, institucion,palabras_clave,tamanio,ruta,descarga) VALUES (?, ?, ?, ?,?,?,?,?)';
 $consulta = $conexion->prepare($statement);
+
+if(obtenerColaboradorPorUsuario($_SESSION['idUsuario'])){
+    ingresar_telefono($_SESSION['usuario'],$_SESSION['usuario']);
+    $idTelefono=getIDTelefono($_SESSION['usuario'],$_SESSION['usuario']);
+    ingresar_direccion($_SESSION['usuario'],$_SESSION['usuario'],$_SESSION['usuario'],$_SESSION['usuario'],$_SESSION['usuario']);
+    $idDireccion=getIDDireccion($Calle,$Nro,$Transversal,$Sector,$Ciudad);
+    ingresar_colaborador($idDireccion, $idTelefono,"",date("Y-m-d"),"D",$_SESSION['idUsuario']);
+}
+
 if ($consulta->execute(array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["archivo"]["size"], $target_file,0))) {
     $seGuardo_db = 1;
 } else {

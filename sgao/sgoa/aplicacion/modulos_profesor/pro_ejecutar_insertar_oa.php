@@ -15,13 +15,14 @@ $palabras_clave = filter_input(INPUT_POST, 'palabras_claves');
 $seGuardo_db = 0;
 $seGuardo_sto = 1;
 $path = $_FILES['archivo']['name'];
-$path2 = $_FILES['archivo2']['name'];
 $ext = pathinfo($path, PATHINFO_EXTENSION);
 $target_file = $almacenamiento .urlencode($nombre). '.' . $ext;
 $target_file2 = $almacenamiento .urlencode($nombre). '.' . $ext.'.jpg';
 
 
  $id_usuario= $_SESSION['id'];
+ 
+ 
 
 $conexion = new Conexion();
 $statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion, id_usuario, institucion,palabras_clave,tamanio,ruta,descarga) VALUES (?, ?, ?, ?,?,?,?,?)';
@@ -49,13 +50,6 @@ if ($seGuardo_db == 1) {
             //echo "Sorry, there was an error uploading your file.";
             $seGuardo_sto = 0;
         }
-        if (move_uploaded_file($_FILES["archivo2"]["tmp_name"],$target_file2)) {
-            //echo "The file ". $nombre. " has been uploaded. en".$target_file;
-            $seGuardo_sto = 1;
-        } else {
-            //echo "Sorry, there was an error uploading your file.";
-            $seGuardo_sto = 0;
-        }
     }
 } else {
 
@@ -64,8 +58,15 @@ if ($seGuardo_db == 1) {
 
 //comprvacion de guardado
 if ($seGuardo_db == 1 && $seGuardo_sto==1) {
+    if(obtenerColaboradorPorUsuario($id_usuario)==NULL){
+        ingresar_telefono($id_usuario,$id_usuario);
+        $idTelefono=getIDTelefono($id_usuario,$id_usuario);
+        ingresar_direccion($id_usuario,$id_usuario,$id_usuario,$id_usuario,$id_usuario);
+        $idDireccion=getIDDireccion($id_usuario,$id_usuario,$id_usuario,$id_usuario,$id_usuario);
+        ingresar_colaborador($idDireccion, $idTelefono,"",date("Y-m-d"),"M",$id_usuario);
+    }
     echo '<script>alert("El objeto de aprendizaje se ha guardo correctamente.")</script> ';
-    echo "<script>location.href='adm_objetos_aprendizaje.php'</script>";
+    echo "<script>location.href='pro_importar_catalogar.php'</script>";
 } else {
     echo '<script>alert("Error ineperado el objeto de aprendizaje no se ha guardado correctamente.")</script> ';
     echo "<script>location.href='adm_objetos_aprendizaje.php'</script>";

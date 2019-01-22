@@ -511,9 +511,10 @@ function obtenerColaboradorPorUsuario($id){
 
 function eliminacionDeRegistro($tabla,$condicion){
     $conexion = new Conexion();
-    $statement = 'DELETE FROM '.$tabla.' where ?';
+    $statement = 'DELETE FROM '.$tabla.' where '.$condicion;
+    echo $statement.'<br>';
     $consulta = $conexion->prepare($statement);
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
-    $consulta->execute($condicion);
+    $consulta->execute();
 }
 ?>
