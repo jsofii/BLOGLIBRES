@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2019 a las 18:24:28
+-- Tiempo de generación: 22-01-2019 a las 18:23:17
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -150,7 +150,8 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`idestudiante`, `ci`, `nombres`, `apellidos`, `carrera`, `id_facultad`, `mail`, `id_usuario`) VALUES
-(1, '1723964308', 'Diego Andres ', 'Portero Lopez', 'FIS', 8, 'diego@epn.com', 4);
+(1, '1723964308', 'Diego Andres ', 'Portero Lopez', 'FIS', 8, 'diego@epn.com', 4),
+(2, '1720775152', 'OSCAR OMAR', 'ACERO ALMACHI', 'FIs', 8, 'acero@epn.edu', 5);
 
 -- --------------------------------------------------------
 
@@ -312,7 +313,11 @@ CREATE TABLE `objeto_aprendizaje` (
 --
 
 INSERT INTO `objeto_aprendizaje` (`idobjeto_aprendizaje`, `nombre`, `descripcion`, `id_usuario`, `institucion`, `fechaCreacion`, `palabras_clave`, `tamanio`, `ruta`, `materia`, `descarga`) VALUES
-(17, 'Metodos', 'Metodos', 1, 'EPN', '2019-01-13 01:43:29', 'metodos', '116845', '../../storage/Metodos.zip', NULL, 1);
+(17, 'Metodos', 'Metodos', 1, 'EPN', '2019-01-13 01:43:29', 'metodos', '116845', '../../storage/Metodos.zip', NULL, 1),
+(18, 'as', 'as', 1, 'as', '2019-01-22 16:23:48', 'as', '335294', '../../storage/as.zip', NULL, 0),
+(19, 'ew', 'ew', 4, 'ew', '2019-01-22 16:24:19', 'ew', '335294', '../../storage/ew.zip', NULL, 0),
+(20, 'zx', 'zx', 3, 'zx', '2019-01-22 16:37:37', 'zx', '335294', '../../storage/zx.zip', NULL, 0),
+(21, 'asd', 'asd', 3, 'asd', '2019-01-22 16:58:00', 'asd', '335294', '../../storage/asd.zip', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -371,7 +376,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `usuario`, `contrasenia`, `tipo_usuario`, `activo`) VALUES
 (1, 'admin', 'admin', 'ADM', 'V'),
 (3, 'Cesar', 'password', 'PRO', 'V'),
-(4, 'Diego', 'password', 'EST', 'V');
+(4, 'Diego', 'password', 'EST', 'V'),
+(5, 'Acero', 'password', 'EST', 'V');
 
 -- --------------------------------------------------------
 
@@ -506,7 +512,7 @@ ALTER TABLE `catalogooa`
 -- AUTO_INCREMENT de la tabla `colaborador`
 --
 ALTER TABLE `colaborador`
-  MODIFY `idColaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idColaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
@@ -524,13 +530,13 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `idDireccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idDireccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `idestudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idestudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `facultad`
@@ -548,7 +554,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `objeto_aprendizaje`
 --
 ALTER TABLE `objeto_aprendizaje`
-  MODIFY `idobjeto_aprendizaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idobjeto_aprendizaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
@@ -560,13 +566,13 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `telefono`
 --
 ALTER TABLE `telefono`
-  MODIFY `idTelefono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idTelefono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `valoracion`
