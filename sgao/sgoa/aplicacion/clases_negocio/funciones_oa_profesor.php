@@ -508,4 +508,12 @@ function obtenerColaboradorPorUsuario($id){
         return null;
     }
 }
+
+function eliminacionDeRegistro($tabla,$condicion){
+    $conexion = new Conexion();
+    $statement = 'DELETE FROM '.$tabla.' where ?';
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute($condicion);
+}
 ?>

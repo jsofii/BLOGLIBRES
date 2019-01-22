@@ -35,20 +35,22 @@ if ($_SESSION['usuario']=='admin') {
 <body>
   <?php include './navbar_adm_colaboradores.php';?>
   <center>
-        <div class="ui segment" style="width:90%;">
-        <table class="ui celled table">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Cédula</th>
-      <th>Teléfono</th>
-      <th>Dirección</th>
-      <th>Fecha de nacimiento</th>
-      <th>Género</th>
-      <th></th>
-    </tr></thead>
-  <tbody>
-    <?php
+    <h1 class="ui header">Pantalla de edición</h1>
+    <div class="ui segment" style="width:90%;">
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Fecha de nacimiento</th>
+            <th>Género</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
     require '../../clases_negocio/funciones_oa_profesor.php';
     $statement = 'SELECT * FROM usuario as u,colaborador as c,profesor as p, telefono as t,Direccion d 
     where c.idUsuario = u.idUsuario and p.id_Usuario=u.idUsuario and c.idtelefono=t.idtelefono and c.idDireccion=d.idDireccion';
@@ -92,12 +94,12 @@ if ($_SESSION['usuario']=='admin') {
     }
     ?>
 
-  </tbody>
-</table>
-        </div>
+        </tbody>
+      </table>
+    </div>
   </center>
 
-  
+
 </body>
 
 </html>
