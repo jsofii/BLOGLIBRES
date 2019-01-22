@@ -42,7 +42,7 @@ if ($_SESSION['usuario']=='admin') {
                         <li><a href="edicion.php">Edicion</a></li>
                         <li><a href="borrar.php">Borrar</a></li>
                         <li><a href="contribuciones.php">Contribuciones</a></li>
-                        <li><a href="../adm_objetos_aprendizaje.php">Salir</a></li>
+                        <li><a href="../pro_buscar.php">Salir</a></li>
                     </ul>
                 </li>
             </ul>

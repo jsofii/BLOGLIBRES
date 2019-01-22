@@ -32,6 +32,7 @@ if (move_uploaded_file($_FILES["perfil"]["tmp_name"],$target_file)) {
     ingresar_direccion($Calle,$Nro,$Transversal,$Sector,$Ciudad);
     $idDireccion=getIDDireccion($Calle,$Nro,$Transversal,$Sector,$Ciudad);
     $idUsu=recuperar_id_usuario_por_nombre($nombre);
+    echo $nombre.' '.$idUsu.'aa';
     ingresar_colaborador($idDireccion, $idTelefono, $DireccionImagen,$fechaDeNacimiento,$Genero,$idUsu);
     echo "<script>location.href='nuevo.php'</script>";
     // echo $NumMes."<br>".$Mes;

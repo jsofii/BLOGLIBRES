@@ -108,7 +108,7 @@ require '../clases_negocio/funciones_oa_profesor.php';
                                 <li><a href="adm_colaboradores/edicion.php">Edicion</a></li>
                                 <li><a href="adm_colaboradores/borrar.php">Borrar</a></li>
                                 <li><a href="adm_colaboradores/contribuciones.php">Contribuciones</a></li>
-                                <li><a href="adm_objetos_aprendizaje.php">Salir</a></li>
+                                <li><a href="pro_buscar.php">Salir</a></li>
                             </ul>
                             </li';
                         }

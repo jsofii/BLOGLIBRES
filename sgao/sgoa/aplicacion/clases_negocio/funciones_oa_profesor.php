@@ -292,6 +292,7 @@ function insertar_usuario($usuario, $contrasenia, $tipo_usuario, $esta_activo) {
 function recuperar_id_usuario_por_nombre($usuario) {
     $conexion = new Conexion();
     $statement = 'select idUsuario from usuario where usuario = "' . $usuario . '"';
+    echo $statement.'<br>';
     $consulta = $conexion->prepare($statement);
     $consulta->setFetchMode(PDO::FETCH_ASSOC);
     $consulta->execute();
