@@ -190,11 +190,14 @@ require '../clases_negocio/funciones_oa_profesor.php';
                             echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
                             if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
                                 echo '<td>ADMINISTRADOR</td>';
-                            } else {
+                            } else if(obtener_tipo_usuario_con_id($row['id_usuario']) == 'PRO') {
                                 $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
                                 echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
+                            }else{
+                                $profesor = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
+                                echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
                             }
-                            //echo '<td>' . $row['ruta'] . '</td>';
+                            echo '<td>' . $row['ruta'] . '</td>';
                             echo '<td><a href="pro_comentarios.php?id='.$row['idobjeto_aprendizaje'].'">'. obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
                             if ($id_usuario == $row['id_usuario']) {
                                 echo '<td><a href="pro_actualizar_oa.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';

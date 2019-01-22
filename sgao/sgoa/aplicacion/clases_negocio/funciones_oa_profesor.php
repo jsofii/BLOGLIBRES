@@ -35,6 +35,23 @@ function obtener_id_profesor_con_id_usuario($id_usuario) {
     }
 }
 
+function obtener_id_estudiante_con_id_usuario($id_usuario) {
+    $conexion = new Conexion();
+    $statement = 'select pro.idestudiante from usuario as us, estudiante as pro where us.idUsuario=pro.id_usuario and us.idUsuario=?';
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute([$id_usuario]);
+    if ($consulta->rowCount() != 0) {
+        $fila = $consulta->fetch();
+        $id_profesor = $fila['idestudiante'];
+    }
+    if (isset($id_profesor)) {
+        return $id_profesor;
+    } else {
+        return null;
+    }
+}
+
 function obtener_profesor_como_arreglo($id_profesor) {
     $conexion = new Conexion();
     $statement = 'select * from profesor where idprofesor=?';
@@ -50,6 +67,23 @@ function obtener_profesor_como_arreglo($id_profesor) {
         return null;
     }
 }
+
+function obtener_estudiante_como_arreglo($id_profesor) {
+    $conexion = new Conexion();
+    $statement = 'select * from estudiante where idestudiante=?';
+    $consulta = $conexion->prepare($statement);
+    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+    $consulta->execute([$id_profesor]);
+    if ($consulta->rowCount() != 0) {
+        $fila = $consulta->fetch();
+    }
+    if (isset($fila)) {
+        return $fila;
+    } else {
+        return null;
+    }
+}
+
 
 function obtener_nro_comentarios_oa($id_objeto_aprendizaje) {
     $conexion = new Conexion();

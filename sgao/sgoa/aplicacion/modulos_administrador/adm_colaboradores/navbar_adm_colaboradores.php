@@ -57,7 +57,7 @@ if ($_SESSION['usuario']=='admin') {
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../../aplicacion/desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span>
+                <li><a href="../../../aplicacion/desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span>
                         Salir</a></li>
             </ul>
         </div>
