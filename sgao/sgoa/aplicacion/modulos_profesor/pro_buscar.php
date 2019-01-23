@@ -99,20 +99,22 @@ require '../clases_negocio/funciones_oa_profesor.php';
                         echo '<li><a href="https://localhost:5001/home/'.$id.'/'.$nombre.'/'.$rol.'">Foro</a></li>';
                         ?>
                         <li><a href="../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                
                         <?php
                         if(obtenerColaboradorPorUsuario($_SESSION['id'])!=NULL){
                             echo '
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
                                 <li><a href="adm_colaboradores/edicion.php">Edicion</a></li>
                                 <li><a href="adm_colaboradores/borrar.php">Borrar</a></li>
-                                <li><a href="adm_colaboradores/contribuciones.php">Contribuciones</a></li>
-                                <li><a href="pro_buscar.php">Salir</a></li>
-                            </ul>
-                            </li';
+                                ';
                         }
                         ?>
+                        <li><a href="adm_colaboradores/contribuciones.php">Contribuciones</a></li>
+                        <li><a href="pro_buscar.php">Salir</a></li>
+                            </ul>
+                            </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
