@@ -47,6 +47,7 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                     <select class= "form-control" name="tipo_criterio" dir="ltr" id="opcBus" required>
                         <option value="nombre">Nombre</option>
                         <option value="apellido">Apellido</option>
+                        <option value="ci">Cédula</option>
                     </select><br>
                 </div>
                 <div  class="ui input col-md-3 text-center"">
@@ -57,17 +58,17 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                 <table class="ui celled table" id="myTable">
                     <thead>
                     <tr class="warning">
-                        <td>Nombre</td>
-                        <td>Descripción</td>
-                        <td>Institución</td>
-                        <td>Fecha Creación</td>
-                        <td>Palabras Clave</td>
-                        <td>Tamaño</td>
-                        <td>Nombre</td>
-                        <td>Apellido</td>
-                        <td>Cédula</td>
-                        <td>Comentarios</td>
-                        <td>Descargas</td>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Institución</th>
+                        <th>Fecha Creación</th>
+                        <th>Palabras Clave</th>
+                        <th>Tamaño</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Comentarios</th>
+                        <th>Descargas</th>
                     </tr>
                     </thead>
             </div>
@@ -94,7 +95,7 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                         echo '<td>ADMINISTRADOR</td><td></td><td></td>';
                     } else if(obtener_tipo_usuario_con_id($row['id_usuario']) == 'PRO') {
                         $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
-                        echo '<td>' . $profesor['nombres'] . '</td><td>' . $profesor['apellidos'] . '</td>';
+                        echo '<td>' . $profesor['nombres'] . '</td><td>' . $profesor['apellidos'] . '</td><td>'.$profesor['ci'].'</td>';
                     }else{
                         $estudiante = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
                         echo '<td>' . $estudiante['nombres'] . '</td><td>' . $estudiante['apellidos'] . '</td><td>'.$estudiante['ci'].'</td>';

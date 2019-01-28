@@ -58,17 +58,17 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                 <table class="ui celled table" id="myTable">
                     <thead>
                     <tr class="warning">
-                        <td>Nombre</td>
-                        <td>Descripción</td>
-                        <td>Institución</td>
-                        <td>Fecha Creación</td>
-                        <td>Palabras Clave</td>
-                        <td>Tamaño</td>
-                        <td>Nombre</td>
-                        <td>Apellido</td>
-                        <td>Cédula</td>
-                        <td>Comentarios</td>
-                        <td>Descargas</td>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Institución</th>
+                        <th>Fecha Creación</th>
+                        <th>Palabras Clave</th>
+                        <th>Tamaño</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Comentarios</th>
+                        <th>Descargas</th>
                     </tr>
                     </thead>
             </div>
