@@ -45,9 +45,9 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                 </div>
                 <div class="col-md-3 text-left ">
                     <select class= "form-control" name="tipo_criterio" dir="ltr" id="opcBus" required>
-                        <option value="">Filtrar por:</option>
                         <option value="nombre">Nombre</option>
                         <option value="apellido">Apellido</option>
+                        <option value="ci">Cédula</option>
                     </select><br>
                 </div>
                 <div  class="ui input col-md-3 text-center"">
@@ -66,6 +66,7 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                         <td>Tamaño</td>
                         <td>Nombre</td>
                         <td>Apellido</td>
+                        <td>Cédula</td>
                         <td>Comentarios</td>
                         <td>Descargas</td>
                     </tr>
@@ -91,20 +92,20 @@ require '../../clases_negocio/funciones_oa_profesor.php';
                     echo '<td>' . $row['palabras_clave'] . '</td>';
                     echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
                     if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
-                        echo '<td>ADMINISTRADOR</td><td></td>';
+                        echo '<td>ADMINISTRADOR</td><td></td><td></td>';
                     } else if(obtener_tipo_usuario_con_id($row['id_usuario']) == 'PRO') {
                         $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
-                        echo '<td>' . $profesor['nombres'] . '</td><td>' . $profesor['apellidos'] . '</td>';
+                        echo '<td>' . $profesor['nombres'] . '</td><td>' . $profesor['apellidos'] . '</td><td>'.$profesor['ci'].'</td>';
                     }else{
-                        $profesor = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
-                        echo '<td>' . $profesor['nombres'] . '</td><td>' . $profesor['apellidos'] . '</td>';
+                        $estudiante = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
+                        echo '<td>' . $estudiante['nombres'] . '</td><td>' . $estudiante['apellidos'] . '</td><td>'.$estudiante['ci'].'</td>';
                     }
                     echo '<td><a href="adm_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
                     echo '<td>' . $row['descarga'] . '</td>';
                     echo '<td><a href="adm_actualizar_oa.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
                     echo "<td><a id='borrar'onClick=\"eliminar('".$row['idobjeto_aprendizaje']."');\" href='adm_buscar.php?id=" . $row['idobjeto_aprendizaje'] . "&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
-                    echo "<td><a href=" . $row['ruta'] . "  onclick= \"myFunction('" . $row['idobjeto_aprendizaje'] . "');\" >Descargar</a></td>";
-                    echo "<td><a href=../../storage/" . $row['ruta'] . ".jpg target=".'_blank'."><span class='glyphicon glyphicon-eye-open'></a></td>";
+                    echo "<td><a href=../" . $row['ruta'] . "  onclick= \"myFunction('" . $row['idobjeto_aprendizaje'] . "');\" >Descargar</a></td>";
+                    echo "<td><a href=../../../storage/" . $row['ruta'] . ".jpg target=".'_blank'."><span class='glyphicon glyphicon-eye-open'></a></td>";
                     echo '</tr>';
                 }
             }
@@ -128,6 +129,8 @@ require '../../clases_negocio/funciones_oa_profesor.php';
         columnaNum = 6;
         if(bus.value=="apellido"){
             columnaNum = 7;
+        }else if(bus.value=="ci"){
+            columnaNum = 8;
         }else{
             columnaNum = 6;
         }

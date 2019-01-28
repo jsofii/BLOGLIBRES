@@ -90,10 +90,10 @@ if($_SERVER["QUERY_STRING"]!=""){
 
                     <div class="two fields">
                         <div class="field">
-                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;" id="in-nombre" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[3];}?> readonly>
+                            <input type="text" name="nombre" placeholder="Nombre" style="border: 2px solid #ccc;" id="in-nombre" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[2];}?> readonly>
                         </div>
                         <div class="field">
-                            <input type="text" name="Apellido" placeholder="Apellido"  style="border: 2px solid #ccc;" id="in-apellido" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[2];}?> readonly> 
+                            <input type="text" name="Apellido" placeholder="Apellido"  style="border: 2px solid #ccc;" id="in-apellido" <?php if($_SERVER["QUERY_STRING"]!=""){echo "value =".$lisAux[3];}?> readonly> 
                         </div>
                     </div>
                 </div>
